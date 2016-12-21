@@ -1,0 +1,43 @@
+@media (min-width: 768px)
+{
+    .form-horizontal .form-group > .control-label,
+    .form-horizontal .form-group > .form-controls
+    {
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .form-group > .control-label
+    {
+        width: 16.6667%;
+    }
+
+    .form-group > .form-controls
+    {
+        width: 83.3333%;
+    }
+
+    .navbar-fixed-top .navbar-collapse,
+    .navbar-static-top .navbar-collapse,
+    .navbar-fixed-bottom .navbar-collapse
+    {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 1200px)
+{
+    .container-fluid
+    {
+        max-width: 1678px;
+    }
+
+    .form-horizontal .form-group
+    {
+
+    }
+}

@@ -1,2 +1,2 @@
 # ise-module-bootstrap
-Twitter Bootstrap module used by Internalsystemerror Limited
+Twitter Bootstrap module for Zend Framework 2 used by Internalsystemerror Limited
