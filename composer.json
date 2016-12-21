@@ -11,11 +11,11 @@
         "zendframework/zend-modulemanager": "^2.5",
         "zendframework/zend-mvc": "^2.5",
         "zendframework/zend-navigation": "^2.5",
-        "zendframework/zend-view": "^2.5"
+        "zendframework/zend-view": "^2.5",
+        "rwoverdijk/assetmanager": "^1.7",
+        "nervo/yuicompressor": "2.4.7"
     },
     "require-dev": {
-        "rwoverdijk/assetmanager": "^1.7",
-        "nervo/yuicompressor": "2.4.7",
         "zendframework/zftool": "^0.1 || ^1.0",
         "zendframework/zenddiagnostics": "^1.0",
         "sensiolabs/security-checker": "^3.0",
