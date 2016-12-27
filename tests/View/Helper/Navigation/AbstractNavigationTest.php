@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrapTest\View\Helper\Navigation;
+namespace IseTest\Bootstrap\View\Helper\Navigation;
 
 use IseBootstrap\View\Helper\Navigation\AbstractNavigation;
 

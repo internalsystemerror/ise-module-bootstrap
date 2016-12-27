@@ -1,8 +1,8 @@
 <?php
 
-namespace IseBootstrap\Form\View\Helper;
+namespace Ise\Bootstrap\Form\View\Helper;
 
-use IseBootstrap\View\Helper\Icon;
+use Ise\Bootstrap\View\Helper\Icon;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\View\Helper\FormButton as ZendFormButton;

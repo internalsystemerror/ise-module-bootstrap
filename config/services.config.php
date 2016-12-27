@@ -1,7 +1,5 @@
 <?php
 
-namespace IseBootstrap;
-
 use Assetic\Filter\Yui\CssCompressorFilter;
 use Assetic\Filter\Yui\JsCompressorFilter;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap\View\Listener;
+namespace Ise\Bootstrap\View\Listener;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;

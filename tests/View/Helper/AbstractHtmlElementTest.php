@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrapTest\View\Helper;
+namespace IseTest\Bootstrap\View\Helper;
 
 use IseBootstrap\View\Helper\AbstractHtmlElement;
 

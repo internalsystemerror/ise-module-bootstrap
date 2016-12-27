@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrapTest\Form\View\Helper;
+namespace IseTest\Bootstrap\Form\View\Helper;
 
 use IseBootstrap\Form\View\Helper\FormInput;
 

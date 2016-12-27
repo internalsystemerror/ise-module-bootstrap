@@ -1,8 +1,8 @@
 <?php
 
-namespace IseBootstrap\View\Helper;
+namespace Ise\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Exception;
+use Ise\Bootstrap\View\Exception;
 use Zend\Json\Json;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;

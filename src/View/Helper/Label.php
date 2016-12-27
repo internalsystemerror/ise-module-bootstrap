@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap\View\Helper;
+namespace Ise\Bootstrap\View\Helper;
 
 class Label extends AbstractTypableHtmlElement
 {

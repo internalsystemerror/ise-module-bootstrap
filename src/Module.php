@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap;
+namespace Ise\Bootstrap;
 
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
@@ -35,7 +35,7 @@ class Module implements
         $navigation  = $viewManager->get('navigation');
         $navigation->getPluginManager()->setInvokableClass(
             'navbar',
-            'IseBootstrap\View\Helper\Navigation\Navbar',
+            'Ise\Bootstrap\View\Helper\Navigation\Navbar',
             true
         );
     }

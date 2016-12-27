@@ -1,9 +1,9 @@
 <?php
 
-namespace IseBootstrap\View\Helper\Navigation;
+namespace Ise\Bootstrap\View\Helper\Navigation;
 
-use IseBootstrap\View\Helper\HtmlElementTrait;
-use IseBootstrap\View\Helper\Icon;
+use Ise\Bootstrap\View\Helper\HtmlElementTrait;
+use Ise\Bootstrap\View\Helper\Icon;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;

@@ -1,12 +1,15 @@
 <?php
 
-namespace IseBootstrap\View\Helper\Navigation;
+namespace Ise\Bootstrap\View\Helper\Navigation;
 
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation\Navigation;
 use Zend\View\Exception;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class Navbar extends AbstractNavigation
 {
 
@@ -350,6 +353,12 @@ HTML;
         return $html;
     }
     
+    /**
+     * Is the page empty?
+     *
+     * @param  AbstractPage $page Page to check
+     * @return boolean
+     */
     protected function isPageEmpty(AbstractPage $page)
     {
         if ($page->get('route')) {

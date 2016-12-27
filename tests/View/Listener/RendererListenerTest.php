@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrapTest\View\Listener;
+namespace IseTest\Bootstrap\View\Listener;
 
 use IseBootstrap\View\Listener\RendererListener;
 

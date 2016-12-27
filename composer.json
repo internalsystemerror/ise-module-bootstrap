@@ -1,6 +1,6 @@
 {
     "name": "ise/ise-module-bootstrap",
-    "description": "Twitter Bootstrap module for Zend Framework 2 used by Internalsystemerror Limited",
+    "description": "Twitter Bootstrap module for Zend Framework used by Internalsystemerror Limited",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/internalsystemerror/ise-module-bootstrap",
     "require": {
@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "IseBootstrap\\": "src"
+            "Ise\\Bootstrap\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IseBootstrapTest\\": "tests"
+            "IseTest\\Bootstrap\\": "tests"
         }
     },
     "extra": {
@@ -36,16 +36,12 @@
         }
     },
     "scripts": {
-        "test": [
-            "@phpunit",
-            "@phpcs",
-            "@phpmd",
-            "@phpcpd"
-        ],
-        "phpunit": "phpunit -c ./phpunit.xml.dist",
-        "phpcs": "phpcs",
-        "phpcbf": "phpcbf",
-        "phpmd": "phpmd . html --reportfile ./build/logs/phpmd.html --suffixes php,phtml --exclude vendor,build ./phpmd.xml.dist",
-        "phpcpd": "phpcpd . --exclude=vendor --exclude=data"
+        "test": "phpunit -c ./phpunit.xml.dist",
+        "cs-fix": "phpcbf",
+        "cs-check": [
+            "phpcs",
+            "phpmd ./config,./src,./tests html --reportfile ./build/logs/phpmd.html --suffixes php,phtml ./phpmd.xml.dist",
+            "phpcpd . --exclude=assets --exclude=build --exclude=vendor "
+        ]
     }
 }

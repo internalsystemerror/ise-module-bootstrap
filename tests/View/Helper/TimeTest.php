@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrapTest\TestView\Helper;
+namespace IseTest\Bootstrap\TestView\Helper;
 
 use IseBootstrap\View\Helper\Time;
 

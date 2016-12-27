@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap\Form\View\Helper;
+namespace Ise\Bootstrap\Form\View\Helper;
 
 use Zend\Form\View\Helper\Form as FormHelper;
 use Zend\Form\FieldsetInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap\Form\View\Helper;
+namespace Ise\Bootstrap\Form\View\Helper;
 
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\View\Helper\FormMultiCheckbox as FormMultiCheckboxHelper;

@@ -1,6 +1,6 @@
 <?php
 
-namespace IseBootstrap\View\Helper;
+namespace Ise\Bootstrap\View\Helper;
 
 use Zend\View\Helper\AbstractHtmlElement as ZendAbstractHtmlElement;
 
