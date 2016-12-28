@@ -6,6 +6,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Router\Http\RouteMatch;
+use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
 
 class RendererListener implements ListenerAggregateInterface
@@ -19,7 +20,7 @@ class RendererListener implements ListenerAggregateInterface
     /**
      * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $events, $priority = 1)
+    public function attach(EventManagerInterface $events, $priority = -1000)
     {
         $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout'], $priority);
     }
@@ -45,7 +46,7 @@ class RendererListener implements ListenerAggregateInterface
     {
         $match          = $event->getRouteMatch();
         $serviceManager = $event->getApplication()->getServiceManager();
-        if (!$match instanceof RouteMatch || !$serviceManager->has('ViewRenderer')) {
+        if (!$match instanceof RouteMatch || $event->getResult()->terminate() || !$serviceManager->has('ViewRenderer')) {
             return;
         }
 
@@ -54,7 +55,6 @@ class RendererListener implements ListenerAggregateInterface
         if (!$viewRenderer instanceof PhpRenderer) {
             return;
         }
-        
         $this->configureView($viewRenderer);
     }
 
