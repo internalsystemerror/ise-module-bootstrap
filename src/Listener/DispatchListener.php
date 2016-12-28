@@ -1,6 +1,6 @@
 <?php
 
-namespace Ise\Bootstrap\View\Listener;
+namespace Ise\Bootstrap\Listener;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -27,8 +27,11 @@ class DispatchListener implements ListenerAggregateInterface
      */
     public function attach(EventManagerInterface $events, $priority = -1000)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH,
-                                             [$this, 'setupLayout'], $priority);
+        $this->listeners[] = $events->attach(
+            MvcEvent::EVENT_DISPATCH,
+            [$this, 'setupLayout'],
+            $priority
+        );
     }
 
     /**
@@ -79,7 +82,8 @@ class DispatchListener implements ListenerAggregateInterface
 
         // Add scripts
         $this->viewRenderer->headScript()->setAllowArbitraryAttributes(true)->appendFile(
-            $basePath . '/js/fix/ltIE9.js', 'text/javascript',
+            $basePath . '/js/fix/ltIE9.js',
+            'text/javascript',
             ['conditional' => 'lt IE 9']
         );
         $this->viewRenderer->inlineScript()->setAllowArbitraryAttributes(true)->appendFile($basePath . '/js/master.js');

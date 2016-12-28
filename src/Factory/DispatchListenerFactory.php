@@ -11,7 +11,7 @@ class DispatchListenerFactory extends FactoryInterface
 {
     /**
      * Create the DispatchListener instance
-     * 
+     *
      * @param ContainerInterface $container
      * @param type $requestedName
      * @return DispatchListener
