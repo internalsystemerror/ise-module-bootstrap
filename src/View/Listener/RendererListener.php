@@ -2,14 +2,14 @@
 
 namespace Ise\Bootstrap\View\Listener;
 
-use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\SharedEventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
-use Zend\EventManager\EventInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Mvc\Router\Http\RouteMatch;
+use Zend\Router\Http\RouteMatch;
+use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
 
-class RendererListener implements ListenerAggregateInterface
+class RendererListener
 {
 
     /**
@@ -20,15 +20,15 @@ class RendererListener implements ListenerAggregateInterface
     /**
      * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $eventManager)
+    public function attach(SharedEventManagerInterface $events, $priority = 1000)
     {
-        $this->listeners[] = $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout']);
+        $this->listeners[] = $events->attach(\Zend\Mvc\Application::class, MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout'], $priority);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function detach(EventManagerInterface $eventManager)
+    public function detach(SharedEventManagerInterface $eventManager)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($eventManager->detach($listener)) {
@@ -40,14 +40,13 @@ class RendererListener implements ListenerAggregateInterface
     /**
      * Load view parameters
      *
-     * @param EventInterface $event
+     * @param MvcEvent $event
      */
-    public function setupLayout(EventInterface $event)
+    public function setupLayout(MvcEvent $event)
     {
         $match          = $event->getRouteMatch();
-        $controller     = $event->getTarget();
         $serviceManager = $event->getApplication()->getServiceManager();
-        if (!$match instanceof RouteMatch || $controller->getEvent()->getResult()->terminate() || !$serviceManager->has('ViewRenderer')) {
+        if (!$match instanceof RouteMatch || !$serviceManager->has('ViewRenderer')) {
             return;
         }
 
@@ -56,7 +55,8 @@ class RendererListener implements ListenerAggregateInterface
         if (!$viewRenderer instanceof PhpRenderer) {
             return;
         }
-        $this->configureViewRenderer($viewRenderer);
+        
+        $this->configureView($viewRenderer);
     }
 
     /**
@@ -64,7 +64,7 @@ class RendererListener implements ListenerAggregateInterface
      *
      * @param PhpRenderer $viewRenderer
      */
-    protected function configureViewRenderer(PhpRenderer $viewRenderer)
+    protected function configureView($viewRenderer)
     {
         // Set meta data
         $viewRenderer->headMeta()->setCharset('UTF-8')

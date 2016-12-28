@@ -2,12 +2,15 @@
 
 namespace Ise\Bootstrap;
 
+use Ise\Bootstrap\View\Helper\Navigation\Navbar;
 use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+use Zend\View\HelperPluginManager;
+use Zend\View\Helper\Navigation;
 
 class Module implements
     BootstrapListenerInterface,
@@ -26,18 +29,13 @@ class Module implements
         $application = $event->getApplication();
 
         // Attach view render listener
-        $application->getEventManager()->attachAggregate(
-            new View\Listener\RendererListener
-        );
+        $renderListener = new View\Listener\RendererListener;
+        $renderListener->attach($application->getEventManager()->getSharedManager());
 
         // Add navigation view helper
-        $viewManager = $application->getServiceManager()->get('viewhelpermanager');
-        $navigation  = $viewManager->get('navigation');
-        $navigation->getPluginManager()->setInvokableClass(
-            'navbar',
-            'Ise\Bootstrap\View\Helper\Navigation\Navbar',
-            true
-        );
+//        $viewManager = $application->getServiceManager()->get(HelperPluginManager::class);
+//        $navigation  = $viewManager->get(Navigation::class);
+//        $navigation->getPluginManager()->setInvokableClass('navbar', Navbar::class, true);
     }
 
     /**
