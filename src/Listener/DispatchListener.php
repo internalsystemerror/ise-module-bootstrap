@@ -6,10 +6,10 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Router\Http\RouteMatch;
-use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Renderer\RendererInterface;
 
-class RendererListener implements ListenerAggregateInterface
+class DispatchListener implements ListenerAggregateInterface
 {
 
     /**
@@ -17,12 +17,18 @@ class RendererListener implements ListenerAggregateInterface
      */
     protected $listeners = [];
 
+    public function __construct(RendererInterface $viewRenderer)
+    {
+        $this->viewRenderer = $viewRenderer;
+    }
+
     /**
      * {@inheritDoc}
      */
     public function attach(EventManagerInterface $events, $priority = -1000)
     {
-        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout'], $priority);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH,
+                                             [$this, 'setupLayout'], $priority);
     }
 
     /**
@@ -44,47 +50,38 @@ class RendererListener implements ListenerAggregateInterface
      */
     public function setupLayout(MvcEvent $event)
     {
-        $match          = $event->getRouteMatch();
-        $serviceManager = $event->getApplication()->getServiceManager();
-        if (!$match instanceof RouteMatch || $event->getResult()->terminate() || !$serviceManager->has('ViewRenderer')) {
+        $match      = $event->getRouteMatch();
+        $controller = $event->getResult();
+        if (!$this->viewRenderer instanceof PhpRenderer || !$match instanceof RouteMatch || !$controller instanceof AbstractController || $controller->terminate()) {
             return;
         }
-
-        // Configure renderer
-        $viewRenderer = $serviceManager->get('ViewRenderer');
-        if (!$viewRenderer instanceof PhpRenderer) {
-            return;
-        }
-        $this->configureView($viewRenderer);
+        $this->configureView();
     }
 
     /**
-     * Configure view renderer
-     *
-     * @param PhpRenderer $viewRenderer
+     * Configure view
      */
-    protected function configureView($viewRenderer)
+    protected function configureView()
     {
         // Set meta data
-        $viewRenderer->headMeta()->setCharset('UTF-8')
+        $this->viewRenderer->headMeta()->setCharset('UTF-8')
             ->appendName('viewport', 'width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
-        $viewRenderer->headTitle()->setSeparator(' :: ')->setAutoEscape(false);
+        $this->viewRenderer->headTitle()->setSeparator(' :: ')->setAutoEscape(false);
 
         // Add stylesheets
-        $basePath = $viewRenderer->basePath();
-        $viewRenderer->headLink([
+        $basePath = $this->viewRenderer->basePath();
+        $this->viewRenderer->headLink([
             'rel'  => 'shortcut icon',
             'type' => 'image/vnd.microsoft.icon',
             'href' => $basePath . '/favicon.ico',
         ])->appendStylesheet($basePath . '/css/master.css');
 
         // Add scripts
-        $viewRenderer->headScript()->setAllowArbitraryAttributes(true)->appendFile(
-            $basePath . '/js/fix/ltIE9.js',
-            'text/javascript',
+        $this->viewRenderer->headScript()->setAllowArbitraryAttributes(true)->appendFile(
+            $basePath . '/js/fix/ltIE9.js', 'text/javascript',
             ['conditional' => 'lt IE 9']
         );
-        $viewRenderer->inlineScript()->setAllowArbitraryAttributes(true)->appendFile($basePath . '/js/master.js');
+        $this->viewRenderer->inlineScript()->setAllowArbitraryAttributes(true)->appendFile($basePath . '/js/master.js');
     }
 }

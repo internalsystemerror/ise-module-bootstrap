@@ -28,8 +28,8 @@ class Module implements
         // Get application
         $application = $event->getApplication();
 
-        // Attach view render listener
-        $renderListener = new View\Listener\RendererListener;
+        // Attach dispatch listener events
+        $renderListener = new Listener\DispatchListener;
         $renderListener->attach($application->getEventManager());
 
         // Add navigation view helper
