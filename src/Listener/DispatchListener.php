@@ -26,7 +26,7 @@ class DispatchListener implements ListenerAggregateInterface
     /**
      * {@inheritDoc}
      */
-    public function attach(EventManagerInterface $events, $priority = -1000)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         $this->listeners[] = $events->attach(
             MvcEvent::EVENT_DISPATCH,
