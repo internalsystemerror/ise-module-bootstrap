@@ -2,14 +2,13 @@
 
 namespace Ise\Bootstrap\View\Listener;
 
-use Zend\EventManager\SharedEventManagerInterface;
+use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Router\Http\RouteMatch;
-use Zend\View\ViewEvent;
 use Zend\View\Renderer\PhpRenderer;
 
-class RendererListener
+class RendererListener implements ListenerAggregateInterface
 {
 
     /**
@@ -20,15 +19,15 @@ class RendererListener
     /**
      * {@inheritDoc}
      */
-    public function attach(SharedEventManagerInterface $events, $priority = 1000)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->listeners[] = $events->attach(\Zend\Mvc\Application::class, MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout'], $priority);
+        $this->listeners[] = $events->attach(MvcEvent::EVENT_DISPATCH, [$this, 'setupLayout'], $priority);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function detach(SharedEventManagerInterface $eventManager)
+    public function detach(EventManagerInterface $eventManager)
     {
         foreach ($this->listeners as $index => $listener) {
             if ($eventManager->detach($listener)) {

@@ -30,7 +30,7 @@ class Module implements
 
         // Attach view render listener
         $renderListener = new View\Listener\RendererListener;
-        $renderListener->attach($application->getEventManager()->getSharedManager());
+        $renderListener->attach($application->getEventManager());
 
         // Add navigation view helper
 //        $viewManager = $application->getServiceManager()->get(HelperPluginManager::class);
