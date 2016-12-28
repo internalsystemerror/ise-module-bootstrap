@@ -69,7 +69,6 @@ $assets = [
 
 
 if (APPLICATION_ENV === 'development') {
-
     // Disable filters
     $assets['filters'] = [];
 

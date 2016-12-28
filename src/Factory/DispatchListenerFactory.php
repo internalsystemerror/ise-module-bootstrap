@@ -15,6 +15,7 @@ class DispatchListenerFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param type $requestedName
      * @return DispatchListener
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
@@ -24,6 +25,7 @@ class DispatchListenerFactory implements FactoryInterface
     
     /**
      * {@inheritDoc}
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function createService(ServiceLocatorInterface $serviceLocator, $name = null, $requestedName = null)
     {
