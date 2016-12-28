@@ -6,6 +6,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Router\Http\RouteMatch;
+use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Renderer\RendererInterface;
 
@@ -53,9 +54,9 @@ class DispatchListener implements ListenerAggregateInterface
      */
     public function setupLayout(MvcEvent $event)
     {
-        $match      = $event->getRouteMatch();
-        $controller = $event->getResult();
-        if (!$this->viewRenderer instanceof PhpRenderer || !$match instanceof RouteMatch || !$controller instanceof AbstractController || $controller->terminate()) {
+        $match     = $event->getRouteMatch();
+        $viewModel = $event->getResult();
+        if (!$this->viewRenderer instanceof PhpRenderer || !$match instanceof RouteMatch || !$viewModel instanceof ViewModel || $viewModel->terminate()) {
             return;
         }
         $this->configureView();

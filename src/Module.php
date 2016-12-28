@@ -29,7 +29,7 @@ class Module implements
         $application = $event->getApplication();
 
         // Attach dispatch listener events
-        $renderListener = new Listener\DispatchListener;
+        $renderListener = $application->getServiceManager()->get(Listener\DispatchListener::class);
         $renderListener->attach($application->getEventManager());
 
         // Add navigation view helper

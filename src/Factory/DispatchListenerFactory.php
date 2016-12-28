@@ -7,7 +7,7 @@ use Ise\Bootstrap\Listener\DispatchListener;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
 
-class DispatchListenerFactory extends FactoryInterface
+class DispatchListenerFactory implements FactoryInterface
 {
     /**
      * Create the DispatchListener instance
@@ -16,9 +16,10 @@ class DispatchListenerFactory extends FactoryInterface
      * @param type $requestedName
      * @return DispatchListener
      */
-    public function __invoke(ContainerInterface $container, $requestedName)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new $requestedName($container->getServiceLocator()->get('ViewRenderer'));
+        $viewRenderer = $container->get('ViewRenderer');
+        return new $requestedName($viewRenderer);
     }
     
     /**

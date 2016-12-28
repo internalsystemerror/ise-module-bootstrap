@@ -1,40 +1,6 @@
 <?php
-// Master js asset collection
-$jsMaster = [
-    'js/bootstrap.js',
-    'js/jquery-timeago.js',
-    'js/bootstrap-global.js',
-];
 
-if (APPLICATION_ENV === 'development') {
-    $filters    = [];
-    $assetCache = [
-        'cache'   => 'Filesystem',
-        'options' => [
-            'dir' => 'data/cache/assets',
-        ],
-    ];
-    array_unshift($jsMaster, 'js/jquery.js');
-    $jsMaster[] = 'js/bootlint.js';
-} else {
-    $filters    = [
-        'js'  => [
-            ['service' => 'bootstrap_compressor_js'],
-        ],
-        'css' => [
-            ['service' => 'bootstrap_compressor_css'],
-        ],
-    ];
-    $assetCache = [
-        'cache'   => 'FilePath',
-        'options' => [
-            'dir' => 'public',
-        ],
-    ];
-    array_unshift($jsMaster, 'js/jquery.min.js');
-}
-
-return [
+$assets = [
     'resolver_configs' => [
         'collections' => [
             /* Master collections */
@@ -44,7 +10,12 @@ return [
                 'css/bootstrap-global.css',
                 'css/bootstrap-queries.css',
             ],
-            'js/master.js'    => $jsMaster,
+            'js/master.js'    => [
+                'js/jquery.min.js',
+                'js/bootstrap.js',
+                'js/jquery-timeago.js',
+                'js/bootstrap-global.js',
+            ],
             /* JS Fixes */
             'js/fix/ltIE9.js' => [
                 'js/html5shiv.js',
@@ -78,8 +49,42 @@ return [
             'js/bootstrap-global.js'                   => __DIR__ . '/../assets/js/bootstrap-global.js',
         ],
     ],
-    'filters'          => $filters,
+    'filters'          => [
+        'js'  => [
+            ['service' => 'bootstrap_compressor_js'],
+        ],
+        'css' => [
+            ['service' => 'bootstrap_compressor_css'],
+        ],
+    ],
     'caching'          => [
-        'default' => $assetCache,
+        'default' => [
+            'cache'   => 'FilePath',
+            'options' => [
+                'dir' => 'public',
+            ],
+        ],
     ],
 ];
+
+
+if (APPLICATION_ENV === 'development') {
+
+    // Disable filters
+    $assets['filters'] = [];
+
+    // Change caching
+    $defaultCaching =& $assets['caching']['default'];
+    $defaultCaching['cache']          = 'Filesystem';
+    $defaultCaching['options']['dir'] = 'data/cache/assets';
+
+    // Modify master.js
+    $jsMaster =& $assets['resolver_configs']['collections']['js/master.js'];
+    $jsMaster[] = 'js/bootlint.js';
+
+    // Update jQuery
+    $jqueryKey            = array_search('js/jquery.min.js', $jsMaster);
+    $jsMaster[$jqueryKey] = 'js/jquery.js';
+}
+
+return $assets;
