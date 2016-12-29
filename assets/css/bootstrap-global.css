@@ -24,7 +24,7 @@ footer
     margin: 0 0 15px 10px;
 }
 
-.control-group-buttons > .form-group:first-of-type
+.modal-footer .control-group-buttons > .form-group:first-of-type
 {
     float: left;
-}
+} 
