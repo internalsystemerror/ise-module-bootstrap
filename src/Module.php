@@ -33,9 +33,9 @@ class Module implements
         $renderListener->attach($application->getEventManager());
 
         // Add navigation view helper
-//        $viewManager = $application->getServiceManager()->get(HelperPluginManager::class);
-//        $navigation  = $viewManager->get(Navigation::class);
-//        $navigation->getPluginManager()->setInvokableClass('navbar', Navbar::class, true);
+        $viewManager = $application->getServiceManager()->get('ViewHelperManager');
+        $navigation  = $viewManager->get(Navigation::class);
+        $navigation->getPluginManager()->setInvokableClass('navbar', Navbar::class, true);
     }
 
     /**
