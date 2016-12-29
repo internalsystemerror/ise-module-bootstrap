@@ -5,7 +5,7 @@ namespace Ise\Bootstrap\Listener;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\Router\Http\RouteMatch;
+use Zend\Mvc\Router\Http\RouteMatch;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\View\Renderer\RendererInterface;
