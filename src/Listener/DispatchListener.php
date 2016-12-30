@@ -59,7 +59,9 @@ class DispatchListener implements ListenerAggregateInterface
     public function setupLayout(MvcEvent $event)
     {
         $viewModel = $event->getResult();
-        if (!$this->viewRenderer instanceof PhpRenderer || !$viewModel instanceof ViewModel || $viewModel->terminate()) {
+        if (!$this->viewRenderer instanceof PhpRenderer 
+            || !$viewModel instanceof ViewModel
+            || $viewModel->terminate()) {
             return;
         }
         $this->configureView();
