@@ -25,6 +25,17 @@ class FlashMessenger extends FlashMessengerHelper
      * {@inheritDoc}
      */
     protected $messageSeparatorString = '</li><li>';
+    
+    /**
+     * {@inheritDoc}
+     */
+    protected $classMessages = [
+        'info'    => 'info',
+        'error'   => 'danger',
+        'success' => 'success',
+        'default' => 'info',
+        'warning' => 'warning',
+    ];
 
     /**
      * Render messages
