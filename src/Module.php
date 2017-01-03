@@ -9,7 +9,6 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
-use Zend\View\HelperPluginManager;
 use Zend\View\Helper\Navigation;
 
 class Module implements
@@ -60,29 +59,6 @@ class Module implements
     public function getServiceConfig()
     {
         return include __DIR__ . '/../config/services.config.php';
-    }
-
-    /**
-     * Get diagnostics for use with ZendDiagnostics module
-     *
-     * @return array
-     */
-    public function getDiagnostics()
-    {
-        return [
-            'Twitter Boostrap CDN is available' => [
-                'HttpService', 'maxcdn.bootstrapcdn.com'
-            ],
-            'JQuery CDN is available'           => [
-                'HttpService', 'code.jquery.com'
-            ],
-            'jQuery Timeago CDN is available'   => [
-                'HttpService', 'timeago.yarp.com'
-            ],
-            'Max CDN is available'              => [
-                'HttpService', 'oss.maxcdn.com'
-            ],
-        ];
     }
 
     /**

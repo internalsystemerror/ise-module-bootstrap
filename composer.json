@@ -15,8 +15,6 @@
         "nervo/yuicompressor": "2.4.7"
     },
     "require-dev": {
-        "zendframework/zftool": "^0.1 || ^1.0",
-        "zendframework/zenddiagnostics": "^1.0",
         "ise/php-metapackage-development": "^1.0"
     },
     "autoload": {
