@@ -39,7 +39,6 @@ $assets = [
             'css/bootstrap-theme.css.map'              => 'http://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.css.map',
             'css/bootstrap-global.css'                 => __DIR__ . '/../assets/css/bootstrap-global.css',
             /* JS */
-            'js/jquery.js'                             => 'http://code.jquery.com/jquery-2.2.4.js',
             'js/jquery.min.js'                         => 'http://code.jquery.com/jquery-2.2.4.min.js',
             'js/jquery-timeago.js'                     => 'http://timeago.yarp.com/jquery.timeago.js',
             'js/bootstrap.js'                          => 'http://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.js',
@@ -79,6 +78,7 @@ if (APPLICATION_ENV === 'development') {
 
     // Modify master.js
     $jsMaster =& $assets['resolver_configs']['collections']['js/master.js'];
+    $assets['resolver_configs']['map']['js/jquery.js'] = 'http://code.jquery.com/jquery-2.2.4.js';
     $jsMaster[] = 'js/bootlint.js';
 
     // Update jQuery
