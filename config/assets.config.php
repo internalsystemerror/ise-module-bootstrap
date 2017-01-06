@@ -50,10 +50,10 @@ return [
     ],
     'filters'          => [
         'js'  => [
-            ['service' => 'bootstrap_compressor_js'],
+            ['service' => __NAMESPACE__ . '\Compressor\Js'],
         ],
         'css' => [
-            ['service' => 'bootstrap_compressor_css'],
+            ['service' => __NAMESPACE__ . '\Compressor\Css'],
         ],
     ],
     'caching' => [

@@ -7,8 +7,6 @@ use Assetic\Filter\Yui\JsCompressorFilter;
 
 return [
     'aliases'   => [
-        'bootstrap_compressor_css'        => __NAMESPACE__ . '\Compressor\Css',
-        'bootstrap_compressor_js'         => __NAMESPACE__ . '\Compressor\Js',
         __NAMESPACE__ . '\Compressor\Css' => CssCompressorFilter::class,
         __NAMESPACE__ . '\Compressor\Js'  => JsCompressorFilter::class,
     ],
