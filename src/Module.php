@@ -66,11 +66,8 @@ class Module implements
      */
     public function getModuleDependencies()
     {
-        if (defined('APPLICATION_ENV') && in_array(APPLICATION_ENV, ['development', 'testing'])) {
-            return [
-                'AssetManager',
-            ];
-        }
-        return [];
+        return [
+            'AssetManager',
+        ];
     }
 }

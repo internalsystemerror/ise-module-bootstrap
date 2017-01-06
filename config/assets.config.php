@@ -1,6 +1,6 @@
 <?php
 
-$assets = [
+return [
     'resolver_configs' => [
         'collections' => [
             /* Master collections */
@@ -56,34 +56,12 @@ $assets = [
             ['service' => 'bootstrap_compressor_css'],
         ],
     ],
-    'caching'          => [
+    'caching' => [
         'default' => [
-            'cache'   => 'FilePath',
+            'cache' => 'Filesystem',
             'options' => [
-                'dir' => 'public',
+                'dir' => 'data/cache/assets'
             ],
         ],
     ],
 ];
-
-
-if (APPLICATION_ENV === 'development') {
-    // Disable filters
-    $assets['filters'] = [];
-
-    // Change caching
-    $defaultCaching =& $assets['caching']['default'];
-    $defaultCaching['cache']          = 'Filesystem';
-    $defaultCaching['options']['dir'] = 'data/cache/assets';
-
-    // Modify master.js
-    $jsMaster =& $assets['resolver_configs']['collections']['js/master.js'];
-    $assets['resolver_configs']['map']['js/jquery.js'] = 'http://code.jquery.com/jquery-2.2.4.js';
-    $jsMaster[] = 'js/bootlint.js';
-
-    // Update jQuery
-    $jqueryKey            = array_search('js/jquery.min.js', $jsMaster);
-    $jsMaster[$jqueryKey] = 'js/jquery.js';
-}
-
-return $assets;
