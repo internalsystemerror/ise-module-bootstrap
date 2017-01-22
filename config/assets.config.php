@@ -1,5 +1,7 @@
 <?php
 
+namespace Ise\Bootstrap;
+
 return [
     'resolver_configs' => [
         'collections' => [
