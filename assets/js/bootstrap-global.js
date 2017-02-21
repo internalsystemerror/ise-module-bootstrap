@@ -22,7 +22,10 @@
      * Register document ready event
      */
     function documentReady() {
-        $document.trigger(eventNames.ready);
+        // Wrap it to unsure it fires last
+        $document.ready(function() {
+            $document.trigger(eventNames.ready);
+        });
     }
     
     /**
