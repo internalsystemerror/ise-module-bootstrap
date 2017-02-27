@@ -127,9 +127,4 @@ return [
         Helper\Label::class                  => InvokableFactory::class,
         Helper\Time::class                   => InvokableFactory::class,
     ],
-//    'navigation' => [
-//        'invokables' => [
-//            'navbar' => Helper\Navigation\Navbar::class,
-//        ],
-//    ],
 ];
