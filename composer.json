@@ -5,19 +5,16 @@
     "homepage": "https://github.com/internalsystemerror/ise-module-bootstrap",
     "require": {
         "php": "^5.6 || ^7.0",
-        "zendframework/zend-eventmanager": "^2.5",
-        "zendframework/zend-form": "^2.5",
-        "zendframework/zend-json": "^2.5",
-        "zendframework/zend-modulemanager": "^2.5",
-        "zendframework/zend-mvc": "^2.5",
-        "zendframework/zend-navigation": "^2.5",
-        "zendframework/zend-view": "^2.5",
+        "zendframework/zend-eventmanager": "^2.5 || ^3.0",
+        "zendframework/zend-form": "^2.5 || ^3.0",
+        "zendframework/zend-modulemanager": "^2.5 || ^3.0",
+        "zendframework/zend-mvc": "^2.5 || ^3.0",
+        "zendframework/zend-navigation": "^2.5 || ^3.0",
+        "zendframework/zend-view": "^2.5 || ^3.0",
         "rwoverdijk/assetmanager": "^1.7",
         "nervo/yuicompressor": "2.4.7"
     },
     "require-dev": {
-        "zendframework/zftool": "^0.1 || ^1.0",
-        "zendframework/zenddiagnostics": "^1.0",
         "ise/php-metapackage-development": "^1.0"
     },
     "autoload": {
@@ -27,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "IseTest\\Bootstrap\\": "tests"
+            "IseTest\\Bootstrap\\": "test"
         }
     },
     "extra": {
@@ -40,7 +37,7 @@
         "cs-fix": "phpcbf",
         "cs-check": [
             "phpcs",
-            "phpmd ./config,./src,./tests html --reportfile ./build/logs/phpmd.html --suffixes php,phtml ./phpmd.xml.dist",
+            "phpmd ./config,./src,./test html --reportfile ./build/logs/phpmd.html --suffixes php,phtml ./phpmd.xml.dist",
             "phpcpd . --exclude=assets --exclude=build --exclude=vendor "
         ]
     }
