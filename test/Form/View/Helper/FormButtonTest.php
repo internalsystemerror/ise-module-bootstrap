@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\Form\View\Helper;
 
-use IseBootstrap\Form\View\Helper\FormButton;
+use Ise\Bootstrap\Form\View\Helper\FormButton;
 use ZendTest\Form\View\Helper\CommonTestCase;
 use ZendTest\Form\View\Helper\FormButtonTest as ZendFormButtonTest;
 

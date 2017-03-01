@@ -2,9 +2,11 @@
 
 namespace IseTest\Bootstrap\Form\View\Helper;
 
-use IseBootstrap\Form\View\Helper\FormDescription;
+use Ise\Bootstrap\Form\View\Helper\FormDescription;
+use Zend\Form\Element;
+use ZendTest\Form\View\Helper\CommonTestCase;
 
-class FormDescriptionTest extends \PHPUnit_Framework_TestCase
+class FormDescriptionTest extends CommonTestCase
 {
 
     /**
@@ -18,77 +20,97 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new FormDescription;
+        parent::setUp();
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::__invoke
-     * @todo   Implement testInvoke().
+     * Test block wrapper default
      */
-    public function testInvoke()
+    public function testDefaultBlockWrapper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals('<p class="help-block">%s</p>', $this->object->getBlockWrapper());
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::setBlockWrapper
-     * @todo   Implement testSetBlockWrapper().
+     * Test can change block wrapper
      */
-    public function testSetBlockWrapper()
+    public function testChangeBlockWrapper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $markup = '<p>%s</p>';
+        $this->object->setBlockWrapper($markup);
+        
+        $this->assertEquals($markup, $this->object->getBlockWrapper());
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::getBlockWrapper
-     * @todo   Implement testGetBlockWrapper().
+     * Test inline wrapper default
      */
-    public function testGetBlockWrapper()
+    public function testDefaultInlineWrapper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $this->assertEquals('<span class="help-inline">%s</span>', $this->object->getInlineWrapper());
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::setInlineWrapper
-     * @todo   Implement testSetInlineWrapper().
+     * Test can change inline wrapper
      */
-    public function testSetInlineWrapper()
+    public function testChangeInlineWrapper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $markup = '<span>%s</span>';
+        $this->object->setInlineWrapper($markup);
+        
+        $this->assertEquals($markup, $this->object->getInlineWrapper());
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::getInlineWrapper
-     * @todo   Implement testGetInlineWrapper().
+     * Render element
      */
-    public function testGetInlineWrapper()
+    public function testRenderBlock()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $element = new Element('foo');
+        $text    = 'This is a help block';
+        $element->setOption('help-block', $text);
+        
+        $markup  = $this->helper->render($element);
+        $this->assertContains($text, $markup);
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::render
-     * @todo   Implement testRender().
+     * Render element
      */
-    public function testRender()
+    public function testRenderBlockWithCustomWrapper()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
+        $element = new Element('foo');
+        $text    = 'This is block help';
+        $wrapper = '<wrapper>%s</wrapper>';
+        $element->setOption('help-block', $text);
+        
+        $markup = $this->helper->render($element, $wrapper);
+        $this->assertEquals(sprintf($wrapper, $text), $markup);
+    }
+
+    /**
+     * Render element
+     */
+    public function testRenderInline()
+    {
+        $element = new Element('foo');
+        $text    = 'This is inline help';
+        $element->setOption('help-inline', $text);
+        
+        $this->assertContains($text, $this->helper->render($element));
+    }
+
+    /**
+     * Render element
+     */
+    public function testRenderInlineWithCustomWrapper()
+    {
+        $element = new Element('foo');
+        $text    = 'This is inline help';
+        $wrapper = '<wrapper>%s</wrapper>';
+        $element->setOption('help-inline', $text);
+        
+        $markup = $this->helper->render($element, $wrapper);
+        $this->assertEquals(sprintf($wrapper, $text), $markup);
     }
 }
