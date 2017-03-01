@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\AbstractTypableHtmlElement;
+use Ise\Bootstrap\View\Helper\AbstractTypableHtmlElement;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
@@ -19,9 +19,9 @@ class AbstractTypableHtmlElementTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('IseBootstrap\View\Helper\AbstractTypableHtmlElement');
+        $this->object = $this->getMockForAbstractClass(AbstractTypableHtmlElement::class);
     }
 
     /**

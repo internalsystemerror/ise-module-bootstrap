@@ -2,29 +2,29 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Alert;
+use Ise\Bootstrap\View\Helper\Label;
 
-class AlertTest extends \PHPUnit_Framework_TestCase
+class LabelTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Alert
+     * @var Label
      */
     protected $object;
 
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->object = new Alert;
+        $this->object = new Label;
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Alert::__invoke
-     * @todo   Implement testInvoke().
+     * @covers IseBootstrap\View\Helper\Label::primary
+     * @todo   Implement testPrimary().
      */
-    public function testInvoke()
+    public function testPrimary()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -33,7 +33,7 @@ class AlertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Alert::success
+     * @covers IseBootstrap\View\Helper\Label::success
      * @todo   Implement testSuccess().
      */
     public function testSuccess()
@@ -45,7 +45,7 @@ class AlertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Alert::info
+     * @covers IseBootstrap\View\Helper\Label::info
      * @todo   Implement testInfo().
      */
     public function testInfo()
@@ -57,7 +57,7 @@ class AlertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Alert::warning
+     * @covers IseBootstrap\View\Helper\Label::warning
      * @todo   Implement testWarning().
      */
     public function testWarning()
@@ -69,22 +69,10 @@ class AlertTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Alert::danger
+     * @covers IseBootstrap\View\Helper\Label::danger
      * @todo   Implement testDanger().
      */
     public function testDanger()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Alert::render
-     * @todo   Implement testRender().
-     */
-    public function testRender()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(

@@ -1,27 +1,27 @@
 <?php
 
-namespace IseTest\Bootstrap\TestView\Helper;
+namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Time;
+use Ise\Bootstrap\View\Helper\Icon;
 
-class TimeTest extends \PHPUnit_Framework_TestCase
+class IconTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var Time
+     * @var Icon
      */
     protected $object;
 
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->object = new Time;
+        $this->object = new Icon;
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Time::__invoke
+     * @covers IseBootstrap\View\Helper\Icon::__invoke
      * @todo   Implement testInvoke().
      */
     public function testInvoke()
@@ -33,7 +33,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Time::render
+     * @covers IseBootstrap\View\Helper\Icon::render
      * @todo   Implement testRender().
      */
     public function testRender()

@@ -1,27 +1,27 @@
 <?php
 
-namespace IseTest\Bootstrap\Form\View\Helper;
+namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\Form\View\Helper\FormDescription;
+use Ise\Bootstrap\View\Helper\Alert;
 
-class FormDescriptionTest extends \PHPUnit_Framework_TestCase
+class AlertTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var FormDescription
+     * @var Alert
      */
     protected $object;
 
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->object = new FormDescription;
+        $this->object = new Alert;
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::__invoke
+     * @covers IseBootstrap\View\Helper\Alert::__invoke
      * @todo   Implement testInvoke().
      */
     public function testInvoke()
@@ -33,10 +33,10 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::setBlockWrapper
-     * @todo   Implement testSetBlockWrapper().
+     * @covers IseBootstrap\View\Helper\Alert::success
+     * @todo   Implement testSuccess().
      */
-    public function testSetBlockWrapper()
+    public function testSuccess()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -45,10 +45,10 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::getBlockWrapper
-     * @todo   Implement testGetBlockWrapper().
+     * @covers IseBootstrap\View\Helper\Alert::info
+     * @todo   Implement testInfo().
      */
-    public function testGetBlockWrapper()
+    public function testInfo()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -57,10 +57,10 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::setInlineWrapper
-     * @todo   Implement testSetInlineWrapper().
+     * @covers IseBootstrap\View\Helper\Alert::warning
+     * @todo   Implement testWarning().
      */
-    public function testSetInlineWrapper()
+    public function testWarning()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -69,10 +69,10 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::getInlineWrapper
-     * @todo   Implement testGetInlineWrapper().
+     * @covers IseBootstrap\View\Helper\Alert::danger
+     * @todo   Implement testDanger().
      */
-    public function testGetInlineWrapper()
+    public function testDanger()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -81,7 +81,7 @@ class FormDescriptionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\Form\View\Helper\FormDescription::render
+     * @covers IseBootstrap\View\Helper\Alert::render
      * @todo   Implement testRender().
      */
     public function testRender()

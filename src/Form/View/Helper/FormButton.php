@@ -81,12 +81,7 @@ class FormButton extends ZendFormButton
     }
 
     /**
-     * Generate an opening button tag
-     *
-     * @param  null|array|ElementInterface $attributesOrElement
-     * @throws Exception\InvalidArgumentException
-     * @throws Exception\DomainException
-     * @return string
+     * {@inheritDoc}
      */
     public function openTag($attributesOrElement = null)
     {

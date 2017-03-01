@@ -1,30 +1,30 @@
 <?php
 
-namespace IseTest\Bootstrap\View\Helper\Navigation;
+namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Navigation\AbstractNavigation;
+use Ise\Bootstrap\View\Helper\AbstractHtmlElement;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
-class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
+class AbstractHtmlElementTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var AbstractNavigation
+     * @var AbstractHtmlElement
      */
     protected $object;
 
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('IseBootstrap\View\Helper\Navigation\AbstractNavigation');
+        $this->object = $this->getMockForAbstractClass(AbstractHtmlElement::class);
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::__invoke
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::__invoke
      * @todo   Implement testInvoke().
      */
     public function testInvoke()
@@ -36,55 +36,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setUlClass
-     * @todo   Implement testSetUlClass().
-     */
-    public function testSetUlClass()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setAddClassToLi
-     * @todo   Implement testSetAddClassToLi().
-     */
-    public function testSetAddClassToLi()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setIconPosition
-     * @todo   Implement testSetIconPosition().
-     */
-    public function testSetIconPosition()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getIconHelper
-     * @todo   Implement testGetIconHelper().
-     */
-    public function testGetIconHelper()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::render
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::render
      * @todo   Implement testRender().
      */
     public function testRender()
@@ -96,19 +48,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::htmlify
-     * @todo   Implement testHtmlify().
-     */
-    public function testHtmlify()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::escapeHtml
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::escapeHtml
      * @todo   Implement testEscapeHtml().
      */
     public function testEscapeHtml()
@@ -120,7 +60,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::escapeHtmlAttribute
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::escapeHtmlAttribute
      * @todo   Implement testEscapeHtmlAttribute().
      */
     public function testEscapeHtmlAttribute()
@@ -132,7 +72,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setElement
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::setElement
      * @todo   Implement testSetElement().
      */
     public function testSetElement()
@@ -144,7 +84,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getElement
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getElement
      * @todo   Implement testGetElement().
      */
     public function testGetElement()
@@ -156,7 +96,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setId
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::setId
      * @todo   Implement testSetId().
      */
     public function testSetId()
@@ -168,7 +108,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getId
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getId
      * @todo   Implement testGetId().
      */
     public function testGetId()
@@ -180,7 +120,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::addClass
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::addClass
      * @todo   Implement testAddClass().
      */
     public function testAddClass()
@@ -192,7 +132,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::removeClass
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::removeClass
      * @todo   Implement testRemoveClass().
      */
     public function testRemoveClass()
@@ -204,7 +144,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setClass
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::setClass
      * @todo   Implement testSetClass().
      */
     public function testSetClass()
@@ -216,7 +156,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getClass
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getClass
      * @todo   Implement testGetClass().
      */
     public function testGetClass()
@@ -228,7 +168,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getClassAsString
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getClassAsString
      * @todo   Implement testGetClassAsString().
      */
     public function testGetClassAsString()
@@ -240,7 +180,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setAttribute
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::setAttribute
      * @todo   Implement testSetAttribute().
      */
     public function testSetAttribute()
@@ -252,7 +192,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::removeAttribute
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::removeAttribute
      * @todo   Implement testRemoveAttribute().
      */
     public function testRemoveAttribute()
@@ -264,7 +204,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::setAttributes
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::setAttributes
      * @todo   Implement testSetAttributes().
      */
     public function testSetAttributes()
@@ -276,7 +216,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getAttribute
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getAttribute
      * @todo   Implement testGetAttribute().
      */
     public function testGetAttribute()
@@ -288,7 +228,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getAttributes
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getAttributes
      * @todo   Implement testGetAttributes().
      */
     public function testGetAttributes()
@@ -300,7 +240,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers IseBootstrap\View\Helper\Navigation\AbstractNavigation::getAttributesAsString
+     * @covers IseBootstrap\View\Helper\AbstractHtmlElement::getAttributesAsString
      * @todo   Implement testGetAttributesAsString().
      */
     public function testGetAttributesAsString()
