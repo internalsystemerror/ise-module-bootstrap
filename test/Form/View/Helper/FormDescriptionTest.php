@@ -12,14 +12,14 @@ class FormDescriptionTest extends CommonTestCase
     /**
      * @var FormDescription
      */
-    protected $object;
+    protected $helper;
 
     /**
      * Sets up the fixture
      */
     protected function setUp()
     {
-        $this->object = new FormDescription;
+        $this->helper = new FormDescription;
         parent::setUp();
     }
 
@@ -28,7 +28,7 @@ class FormDescriptionTest extends CommonTestCase
      */
     public function testDefaultBlockWrapper()
     {
-        $this->assertEquals('<p class="help-block">%s</p>', $this->object->getBlockWrapper());
+        $this->assertEquals('<p class="help-block">%s</p>', $this->helper->getBlockWrapper());
     }
 
     /**
@@ -37,9 +37,9 @@ class FormDescriptionTest extends CommonTestCase
     public function testChangeBlockWrapper()
     {
         $markup = '<p>%s</p>';
-        $this->object->setBlockWrapper($markup);
+        $this->helper->setBlockWrapper($markup);
         
-        $this->assertEquals($markup, $this->object->getBlockWrapper());
+        $this->assertEquals($markup, $this->helper->getBlockWrapper());
     }
 
     /**
@@ -47,7 +47,7 @@ class FormDescriptionTest extends CommonTestCase
      */
     public function testDefaultInlineWrapper()
     {
-        $this->assertEquals('<span class="help-inline">%s</span>', $this->object->getInlineWrapper());
+        $this->assertEquals('<span class="help-inline">%s</span>', $this->helper->getInlineWrapper());
     }
 
     /**
@@ -56,9 +56,9 @@ class FormDescriptionTest extends CommonTestCase
     public function testChangeInlineWrapper()
     {
         $markup = '<span>%s</span>';
-        $this->object->setInlineWrapper($markup);
+        $this->helper->setInlineWrapper($markup);
         
-        $this->assertEquals($markup, $this->object->getInlineWrapper());
+        $this->assertEquals($markup, $this->helper->getInlineWrapper());
     }
 
     /**
