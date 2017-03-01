@@ -7,7 +7,8 @@
         load: 'ise:load'
     }, selectors = {
         time: '.timeago',
-        modal: '.modal'
+        modal: '.modal',
+        title: '[title]'
     };
     
     /**
@@ -41,6 +42,10 @@
     function iseReady() {
         $(selectors.time).timeago();
         $(selectors.modal).modal().on('shown.bs.modal', modalShown);
+        $(selectors.title).tooltip({
+            container: 'body',
+            placement: 'auto'
+        });
     }
     
     /**
