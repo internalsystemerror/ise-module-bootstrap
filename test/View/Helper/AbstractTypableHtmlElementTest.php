@@ -21,7 +21,7 @@ class AbstractTypableHtmlElementTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('IseBootstrap\View\Helper\AbstractTypableHtmlElement');
+        $this->object = $this->getMockForAbstractClass(AbstractTypableHtmlElement::class);
     }
 
     /**

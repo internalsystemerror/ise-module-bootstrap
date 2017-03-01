@@ -20,7 +20,7 @@ class AbstractNavigationTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('IseBootstrap\View\Helper\Navigation\AbstractNavigation');
+        $this->object = $this->getMockForAbstractClass(AbstractNavigation::class);
     }
 
     /**
