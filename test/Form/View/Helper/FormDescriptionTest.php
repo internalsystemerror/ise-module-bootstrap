@@ -105,7 +105,7 @@ class FormDescriptionTest extends CommonTestCase
         $wrapper = '<wrapper>%s</wrapper>';
         $element->setOption('help-inline', $text);
         
-        $markup = $this->helper->render($element, $wrapper);
+        $markup = $this->helper->render($element, null, $wrapper);
         $this->assertEquals(sprintf($wrapper, $text), $markup);
     }
 }
