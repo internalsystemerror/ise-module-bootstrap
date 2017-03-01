@@ -10,9 +10,14 @@ class FormButtonTest extends ZendFormButtonTest
 {
 
     /**
+     * @var FormButton
+     */
+    protected $helper;
+
+    /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->helper = new FormButton;
         CommonTestCase::setUp();

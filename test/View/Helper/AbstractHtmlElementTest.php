@@ -18,7 +18,7 @@ class AbstractHtmlElementTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->object = $this->getMockForAbstractClass('IseBootstrap\View\Helper\AbstractHtmlElement');
     }

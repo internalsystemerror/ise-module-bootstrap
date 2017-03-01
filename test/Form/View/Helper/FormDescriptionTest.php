@@ -17,7 +17,7 @@ class FormDescriptionTest extends CommonTestCase
     /**
      * Sets up the fixture
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->helper = new FormDescription;
         parent::setUp();
