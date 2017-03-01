@@ -15,7 +15,8 @@
         "nervo/yuicompressor": "2.4.7"
     },
     "require-dev": {
-        "ise/php-metapackage-development": "^1.0"
+        "ise/php-metapackage-development": "^1.0",
+        "zendframework/zend-i18n": "^2.6 || ^3.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
