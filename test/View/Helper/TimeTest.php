@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\TestView\Helper;
 
-use IseBootstrap\View\Helper\Time;
+use Ise\Bootstrap\View\Helper\Time;
 
 class TimeTest extends \PHPUnit_Framework_TestCase
 {

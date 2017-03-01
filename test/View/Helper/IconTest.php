@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Icon;
+use Ise\Bootstrap\View\Helper\Icon;
 
 class IconTest extends \PHPUnit_Framework_TestCase
 {

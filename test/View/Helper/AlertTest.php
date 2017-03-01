@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Alert;
+use Ise\Bootstrap\View\Helper\Alert;
 
 class AlertTest extends \PHPUnit_Framework_TestCase
 {

@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper\Navigation;
 
-use IseBootstrap\View\Helper\Navigation\Navbar;
+use Ise\Bootstrap\View\Helper\Navigation\Navbar;
 
 class NavbarTest extends \PHPUnit_Framework_TestCase
 {

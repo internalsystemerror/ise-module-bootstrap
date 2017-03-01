@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\AbstractHtmlElement;
+use Ise\Bootstrap\View\Helper\AbstractHtmlElement;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)

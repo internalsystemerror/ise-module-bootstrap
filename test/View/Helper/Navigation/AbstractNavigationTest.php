@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper\Navigation;
 
-use IseBootstrap\View\Helper\Navigation\AbstractNavigation;
+use Ise\Bootstrap\View\Helper\Navigation\AbstractNavigation;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)

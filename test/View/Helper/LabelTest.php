@@ -2,7 +2,7 @@
 
 namespace IseTest\Bootstrap\View\Helper;
 
-use IseBootstrap\View\Helper\Label;
+use Ise\Bootstrap\View\Helper\Label;
 
 class LabelTest extends \PHPUnit_Framework_TestCase
 {
