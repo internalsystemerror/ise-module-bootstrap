@@ -79,7 +79,7 @@ class FormDescriptionTest extends CommonTestCase
         $wrapper = '<wrapper>%s</wrapper>';
         $element->setOption('help-block', $text);
         
-        $markup = $this->c->render($element, $wrapper);
+        $markup = $this->helper->render($element, $wrapper);
         $this->assertEquals(sprintf($wrapper, $text), $markup);
     }
 
