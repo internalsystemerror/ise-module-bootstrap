@@ -43,7 +43,7 @@
         $(selectors.time).timeago();
         $(selectors.modal).modal().on('shown.bs.modal', modalShown);
         $(selectors.title).tooltip({
-            container: 'body',
+            container: 'main',
             placement: 'auto'
         });
     }
