@@ -10,11 +10,6 @@ class FormDescriptionTest extends CommonTestCase
 {
 
     /**
-     * @var FormDescription
-     */
-    protected $helper;
-
-    /**
      * Sets up the fixture
      */
     public function setUp()

@@ -10,11 +10,6 @@ class FormButtonTest extends ZendFormButtonTest
 {
 
     /**
-     * @var FormButton
-     */
-    protected $helper;
-
-    /**
      * Sets up the fixture
      */
     public function setUp()
