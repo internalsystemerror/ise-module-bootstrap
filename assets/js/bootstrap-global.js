@@ -33,7 +33,9 @@
      * Register window load event
      */
     function windowLoad() {
-        $window.trigger(eventNames.load);
+        $window.load(function() {
+            $window.trigger(eventNames.load); 
+        });
     }
     
     /**
@@ -44,7 +46,8 @@
         $(selectors.modal).modal().on('shown.bs.modal', modalShown);
         $(selectors.title).tooltip({
             container: 'main',
-            placement: 'auto'
+            placement: 'auto',
+            trigger: 'hover'
         });
     }
     
