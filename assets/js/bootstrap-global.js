@@ -7,7 +7,8 @@
         load: 'ise:load'
     }, selectors = {
         time: '.timeago',
-        modal: '.modal'
+        modal: '.modal',
+        title: '[title]'
     };
     
     /**
@@ -32,7 +33,9 @@
      * Register window load event
      */
     function windowLoad() {
-        $window.trigger(eventNames.load);
+        $window.load(function() {
+            $window.trigger(eventNames.load); 
+        });
     }
     
     /**
@@ -41,6 +44,11 @@
     function iseReady() {
         $(selectors.time).timeago();
         $(selectors.modal).modal().on('shown.bs.modal', modalShown);
+        $(selectors.title).tooltip({
+            container: 'main',
+            placement: 'auto',
+            trigger: 'hover'
+        });
     }
     
     /**
