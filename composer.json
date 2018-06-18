@@ -48,7 +48,7 @@
         }
     },
     "scripts": {
-        "analyse": "phpstan analyse -l 6 config src",
+        "analyse": "phpstan analyse -l 7 config src",
         "cs-check": [
             "phpcs",
             "phpmd config,src,test html --reportfile build/logs/phpmd.html --suffixes php,phtml phpmd.xml.dist",

@@ -108,7 +108,7 @@ class FormRow extends FormRowHelper
      */
     public function setDescriptionHelper(FormDescription $descriptionHelper): void
     {
-        $descriptionHelper->setView($this->getView());
+        $descriptionHelper->setView($this->view);
         $this->descriptionHelper = $descriptionHelper;
     }
 

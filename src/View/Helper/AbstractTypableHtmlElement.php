@@ -22,9 +22,9 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
     protected $typePrefix = '';
 
     /**
-     * @var string|false
+     * @var string
      */
-    protected $defaultType = false;
+    protected $defaultType = '';
 
     /**
      * @var string
@@ -182,9 +182,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
     {
         // Check variables
         if (!$type) {
-            if ($this->defaultType !== false) {
-                $type = $this->defaultType;
-            }
+            $type = $this->defaultType;
         }
         $this->setType($type);
 

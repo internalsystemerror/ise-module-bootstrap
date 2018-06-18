@@ -56,7 +56,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return self|string
      */
-    public function __invoke(string $message = null, ?string $type = 'info', bool $dismissible = false)
+    public function __invoke(string $message = null, string $type = null, bool $dismissible = false)
     {
         if ($message) {
             return $this->render($message, $type, $dismissible);
@@ -125,7 +125,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function render(string $message = null, ?string $type = 'info', bool $dismissible = false): string
+    public function render(string $message = null, string $type = null, bool $dismissible = false): string
     {
         if ($dismissible) {
             $message .= $this->renderCloseButton();

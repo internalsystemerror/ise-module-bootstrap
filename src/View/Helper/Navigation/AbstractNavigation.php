@@ -217,15 +217,24 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     {
         // Set up element
         $this->setElement('a');
-        $this->setId($page->getId());
+        $id = $page->getId();
+        if ($id) {
+            $this->setId($id);
+        }
         $this->setClass([]);
-        $this->setAttributes([
-            'title' => $this->translate($page->getTitle(), $page->getTextDomain()),
-        ]);
+        $title = $page->getTitle();
+        if ($title) {
+            $this->setAttributes([
+                'title' => $this->translate($title, $page->getTextDomain()),
+            ]);
+        }
 
         // Set class
         if (!$addClassToLi) {
-            $this->addClass($page->getClass());
+            $class = $page->getClass();
+            if ($class) {
+                $this->addClass($class);
+            }
         }
 
         // Check for button
@@ -259,7 +268,10 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
         // Add href
         $href = $page->getHref() ?: '#';
         if ($href !== '#') {
-            $this->setAttribute('target', $page->getTarget());
+            $target = $page->getTarget();
+            if ($target) {
+                $this->setAttribute('target', $target);
+            }
         }
         $this->setAttribute('href', $href);
     }
