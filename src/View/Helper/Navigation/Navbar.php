@@ -346,11 +346,11 @@ HTML;
         // Add menu item
         $liClass = $this->createNavbarMenuItemClass($page, $options['addClassToLi'], $depth);
         $html    .= '<li' . $liClass . '>' . $this->htmlify(
-                $page,
-                $options['addClassToLi'],
-                $options['iconPosition'],
-                $depth >= self::MAX_RENDER_DEPTH
-            );
+            $page,
+            $options['addClassToLi'],
+            $options['iconPosition'],
+            $depth >= self::MAX_RENDER_DEPTH
+        );
 
         return $html;
     }
