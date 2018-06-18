@@ -11,6 +11,7 @@ use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
+use Zend\Mvc\Application;
 use Zend\View\Helper\Navigation;
 use Zend\View\HelperPluginManager;
 
@@ -27,6 +28,9 @@ class Module implements
     {
         // Get application
         $application = $event->getTarget();
+        if (!$application instanceof Application) {
+            return;
+        }
 
         // Attach dispatch listener events
         /** @var Listener\DispatchListener $renderListener */
