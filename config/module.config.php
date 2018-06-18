@@ -4,6 +4,8 @@
  */
 declare(strict_types=1);
 
+namespace Ise\Bootstrap;
+
 return [
     'view_manager'    => ['doctype' => 'HTML5',],
     'asset_manager'   => include __DIR__ . '/assets.config.php',
