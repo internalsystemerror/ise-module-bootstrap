@@ -11,7 +11,14 @@ use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
 use Zend\Form\LabelAwareInterface;
 use Zend\Form\View\Helper\FormButton as ZendFormButton;
+use Zend\View\Renderer\PhpRenderer;
 
+/**
+ * Class FormButton
+ *
+ * @package Ise\Bootstrap\Form\View\Helper
+ * @property PhpRenderer $view
+ */
 class FormButton extends ZendFormButton
 {
 
@@ -116,7 +123,7 @@ class FormButton extends ZendFormButton
 
         $element = $attributesOrElement;
         $name    = $element->getName();
-        if (empty($name) && $name !== 0) {
+        if (!$name) {
             throw new Exception\DomainException(sprintf(
                 '%s requires that the element has an assigned name; none discovered',
                 __METHOD__
@@ -150,10 +157,11 @@ class FormButton extends ZendFormButton
     public function getIconHelper(): Icon
     {
         if (!$this->iconHelper) {
-            $this->iconHelper = $this->getView()->plugin('icon');
-            if (!$this->iconHelper instanceof Icon) {
+            $helper = $this->view->plugin('icon');
+            if (!$helper instanceof Icon) {
                 throw new Exception\ExtensionNotLoadedException('Helper not loaded: icon');
             }
+            $this->iconHelper = $helper;
         }
         return $this->iconHelper;
     }

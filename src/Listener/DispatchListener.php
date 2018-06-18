@@ -11,7 +11,6 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\PhpRenderer;
-use Zend\View\Renderer\RendererInterface;
 
 class DispatchListener implements ListenerAggregateInterface
 {
@@ -22,16 +21,16 @@ class DispatchListener implements ListenerAggregateInterface
     protected $listeners = [];
 
     /**
-     * @var RendererInterface
+     * @var PhpRenderer
      */
     protected $viewRenderer;
 
     /**
      * DispatchListener constructor
      *
-     * @param RendererInterface $viewRenderer
+     * @param PhpRenderer $viewRenderer
      */
-    public function __construct(RendererInterface $viewRenderer)
+    public function __construct(PhpRenderer $viewRenderer)
     {
         $this->viewRenderer = $viewRenderer;
     }
@@ -93,7 +92,7 @@ class DispatchListener implements ListenerAggregateInterface
         $this->viewRenderer->headMeta()->setCharset('UTF-8')
                            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
                            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
-        $this->viewRenderer->headTitle()->setSeparator(' :: ')->setAutoEscape(false);
+        $this->viewRenderer->headTitle()->setAutoEscape(false)->__set('separator', ' :: ');
 
         // Add stylesheets
         $basePath = $this->viewRenderer->basePath();
@@ -101,14 +100,15 @@ class DispatchListener implements ListenerAggregateInterface
             'rel'  => 'shortcut icon',
             'type' => 'image/vnd.microsoft.icon',
             'href' => $basePath . '/favicon.ico',
-        ])->appendStylesheet($basePath . '/css/master.css');
+        ])->__call('appendStylesheet', [$basePath . '/css/master.css']);
 
         // Add scripts
-        $this->viewRenderer->headScript()->setAllowArbitraryAttributes(true)->appendFile(
+        $this->viewRenderer->headScript()->setAllowArbitraryAttributes(true)->__call('appendFile', [
             $basePath . '/js/fix/ltIE9.js',
             'text/javascript',
-            ['conditional' => 'lt IE 9']
-        );
-        $this->viewRenderer->inlineScript()->setAllowArbitraryAttributes(true)->appendFile($basePath . '/js/master.js');
+            ['conditional' => 'lt IE 9'],
+        ]);
+        $this->viewRenderer->inlineScript()->setAllowArbitraryAttributes(true)
+                           ->__call('appendFile', [$basePath . '/js/master.js']);
     }
 }

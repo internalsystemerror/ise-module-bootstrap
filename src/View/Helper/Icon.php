@@ -302,7 +302,7 @@ class Icon extends AbstractTypableHtmlElement
     /**
      * @var string
      */
-    protected $defaultType = false;
+    protected $defaultType = '';
 
     /**
      * @var string
@@ -312,12 +312,12 @@ class Icon extends AbstractTypableHtmlElement
     /**
      * Helper entry point
      *
-     * @param  string $icon The icon to render
-     * @param  string $ignored
+     * @param  string|null $icon The icon to render
+     * @param  string|null $ignored
      *
      * @return string|self
      */
-    public function __invoke($icon = null, $ignored = '')
+    public function __invoke(string $icon = null, string $ignored = null)
     {
         if ($icon) {
             return $this->render($icon);
@@ -333,7 +333,7 @@ class Icon extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function render($icon, $ignored = ''): string
+    public function render(string $icon = null, string $ignored = null): string
     {
         return parent::render('', $icon);
     }

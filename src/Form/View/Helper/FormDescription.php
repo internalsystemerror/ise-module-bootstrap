@@ -31,8 +31,11 @@ class FormDescription extends AbstractHelper
      *
      * @return string|self
      */
-    public function __invoke(ElementInterface $element = null, $blockWrapper = null, $inlineWrapper = null)
-    {
+    public function __invoke(
+        ElementInterface $element = null,
+        string $blockWrapper = null,
+        string $inlineWrapper = null
+    ) {
         if ($element) {
             return $this->render($element, $blockWrapper, $inlineWrapper);
         }
@@ -56,9 +59,9 @@ class FormDescription extends AbstractHelper
      *
      * @return void
      */
-    public function setBlockWrapper($blockWrapper): void
+    public function setBlockWrapper(string $blockWrapper): void
     {
-        $this->blockWrapper = (string)$blockWrapper;
+        $this->blockWrapper = $blockWrapper;
     }
 
     /**
@@ -78,9 +81,9 @@ class FormDescription extends AbstractHelper
      *
      * @return void
      */
-    public function setInlineWrapper($inlineWrapper): void
+    public function setInlineWrapper(string $inlineWrapper): void
     {
-        $this->inlineWrapper = (string)$inlineWrapper;
+        $this->inlineWrapper = $inlineWrapper;
     }
 
     /**
@@ -92,7 +95,7 @@ class FormDescription extends AbstractHelper
      *
      * @return string
      */
-    public function render(ElementInterface $element, $blockWrapper = null, $inlineWrapper = null): string
+    public function render(ElementInterface $element, string $blockWrapper = null, string $inlineWrapper = null): string
     {
         $html   = '';
         $inline = $element->getOption('help-inline');

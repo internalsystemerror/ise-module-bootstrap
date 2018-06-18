@@ -19,12 +19,12 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     use HtmlElementTrait;
 
     /**
-     * @const integer
+     * @const int
      */
     const ICON_PREPEND = 0;
 
     /**
-     * @const integer
+     * @const int
      */
     const ICON_APPEND = 1;
 
@@ -44,7 +44,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     protected $addClassToLi = false;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $iconPosition = self::ICON_PREPEND;
 
@@ -70,9 +70,9 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @return void
      */
-    public function setUlClass($ulClass): void
+    public function setUlClass(string $ulClass): void
     {
-        $this->ulClass = (string)$ulClass;
+        $this->ulClass = $ulClass;
     }
 
     /**
@@ -83,19 +83,19 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @return void
      */
-    public function setAddClassToLi($addClassToLi): void
+    public function setAddClassToLi(bool $addClassToLi): void
     {
-        $this->addClassToLi = (bool)$addClassToLi;
+        $this->addClassToLi = $addClassToLi;
     }
 
     /**
      * Set add class to li
      *
-     * @param  bool $iconPosition Icon position
+     * @param  int $iconPosition Icon position
      *
      * @return void
      */
-    public function setIconPosition($iconPosition): void
+    public function setIconPosition(int $iconPosition): void
     {
         switch ($iconPosition) {
             case self::ICON_PREPEND:
@@ -115,10 +115,11 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     public function getIconHelper(): Icon
     {
         if (!$this->iconHelper) {
-            $this->iconHelper = $this->getView()->plugin('icon');
-            if (!$this->iconHelper instanceof Icon) {
+            $helper = $this->view->plugin('icon');
+            if (!$helper instanceof Icon) {
                 throw new Exception\RuntimeException('Helper not loaded: icon');
             }
+            $this->iconHelper = $helper;
         }
         return $this->iconHelper;
     }
@@ -128,12 +129,12 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  AbstractContainer $container  [Optional] Container to create menu
-     *                                       from. Default is to use the
-     *                                       container retrieved from
-     *                                       {@link getContainer()}.
-     * @param  array             $options    [Optional] Options for controlling
-     *                                       rendering
+     * @param  string|AbstractContainer $container [Optional] Container to create menu
+     *                                             from. Default is to use the
+     *                                             container retrieved from
+     *                                             {@link getContainer()}.
+     * @param  array                    $options   [Optional] Options for controlling
+     *                                             rendering
      *
      * @return string
      */
@@ -155,7 +156,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * @param  AbstractPage $page         Page to render
      * @param  bool         $addClassToLi Whether to add the page class to the
      *                                    li, or leave it for the element
-     * @param  integer      $iconPosition Prepend or append the icon (if given)
+     * @param  int          $iconPosition Prepend or append the icon (if given)
      * @param  bool         $isLast       Whether element should be considered
      *                                    the last child
      *
@@ -164,9 +165,9 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      */
     public function htmlify(
         AbstractPage $page,
-        $addClassToLi = false,
-        $iconPosition = self::ICON_PREPEND,
-        $isLast = false
+        bool $addClassToLi = false,
+        int $iconPosition = self::ICON_PREPEND,
+        bool $isLast = false
     ): string {
 
         // Render elements
@@ -187,13 +188,13 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     /**
      * Render content
      *
-     * @param $icon
-     * @param $label
-     * @param $iconPosition
+     * @param string $icon
+     * @param string $label
+     * @param int    $iconPosition
      *
      * @return string
      */
-    protected function renderContent($icon, $label, $iconPosition): string
+    protected function renderContent(string $icon, string $label, int $iconPosition): string
     {
         if ($iconPosition === self::ICON_PREPEND) {
             return $icon . ' ' . $label;
@@ -212,7 +213,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @return void
      */
-    protected function setupAttributes(AbstractPage $page, $addClassToLi, $isLast): void
+    protected function setupAttributes(AbstractPage $page, bool $addClassToLi, bool $isLast): void
     {
         // Set up element
         $this->setElement('a');
@@ -244,7 +245,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @return void
      */
-    protected function setupButton($button, $page): void
+    protected function setupButton(string $button, AbstractPage $page): void
     {
         if ($button) {
             $this->setElement('button');
@@ -270,7 +271,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @return string
      */
-    protected function renderIcon($page): string
+    protected function renderIcon(AbstractPage $page): string
     {
         $icon = $page->get('icon');
         if (!$icon) {

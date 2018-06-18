@@ -10,8 +10,13 @@ use Ise\Bootstrap\View\Exception;
 use Zend\Json\Json;
 use Zend\View\Helper\EscapeHtml;
 use Zend\View\Helper\EscapeHtmlAttr;
+use Zend\View\Renderer\PhpRenderer;
 
 /**
+ * Trait HtmlElementTrait
+ *
+ * @package Ise\Bootstrap\View\Helper
+ * @property PhpRenderer $view
  * @SuppressWarnings(PHPMD.ShortVariable)
  */
 trait HtmlElementTrait
@@ -54,7 +59,7 @@ trait HtmlElementTrait
      *
      * @return self|string
      */
-    public function __invoke($content = null)
+    public function __invoke(string $content = null)
     {
         if ($content) {
             return $this->render($content);
@@ -69,11 +74,8 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function render($content): string
+    public function render(string $content = null): string
     {
-        // Check content
-        $this->checkContent($content);
-
         // Render html
         return $this->renderElement($content);
     }
@@ -85,10 +87,10 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function escapeHtml($text): string
+    public function escapeHtml(string $text): string
     {
         if (!$this->escapeHtmlHelper) {
-            $this->escapeHtmlHelper = $this->getView()->plugin('escapehtml');
+            $this->escapeHtmlHelper = $this->view->plugin('escapehtml');
             if (!$this->escapeHtmlHelper instanceof EscapeHtml) {
                 throw new Exception\RuntimeException('Helper not loaded: escapeHtml');
             }
@@ -103,10 +105,10 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function escapeHtmlAttribute($attribute): string
+    public function escapeHtmlAttribute(string $attribute): string
     {
         if (!$this->escapeHtmlAttrHelper) {
-            $this->escapeHtmlAttrHelper = $this->getView()->plugin('escapehtmlattr');
+            $this->escapeHtmlAttrHelper = $this->view->plugin('escapehtmlattr');
             if (!$this->escapeHtmlAttrHelper instanceof EscapeHtmlAttr) {
                 throw new Exception\RuntimeException('Helper not loaded: escapeHtmlAttr');
             }
@@ -131,9 +133,9 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function setElement($element): void
+    public function setElement(string $element): void
     {
-        $this->element = (string)$element;
+        $this->element = $element;
     }
 
     /**
@@ -153,9 +155,9 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function setId($id): void
+    public function setId(string $id): void
     {
-        $this->id = (string)$id;
+        $this->id = $id;
     }
 
     /**
@@ -165,9 +167,9 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function addClass($class): void
+    public function addClass(string $class): void
     {
-        $this->class[] = (string)$class;
+        $this->class[] = $class;
     }
 
     /**
@@ -177,9 +179,9 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function removeClass($class): void
+    public function removeClass(string $class): void
     {
-        $index = array_search((string)$class, $this->class);
+        $index = array_search($class, $this->class);
         if ($index !== false) {
             unset($this->class[$index]);
         }
@@ -225,7 +227,7 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function setAttribute($key, $value): void
+    public function setAttribute(string $key, string $value): void
     {
         if ($key === 'class') {
             $this->setClass([$value]);
@@ -240,7 +242,7 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function removeAttribute($key): void
+    public function removeAttribute(string $key): void
     {
         if (isset($this->attributes[$key])) {
             if ($key === 'class') {
@@ -257,7 +259,7 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function getAttribute($key): string
+    public function getAttribute(string $key): string
     {
         if ($key === 'class') {
             return $this->getClassAsString();
@@ -291,9 +293,9 @@ trait HtmlElementTrait
      *
      * @return void
      */
-    public function setAttributes($attributes): void
+    public function setAttributes(array $attributes): void
     {
-        if (isset($attributes['class'])) {
+        if ($attributes['class']) {
             $class = $attributes['class'];
             $this->setClass([$class]);
             unset($attributes['class']);
@@ -312,28 +314,13 @@ trait HtmlElementTrait
     }
 
     /**
-     * Checks the content
-     *
-     * @param  string|null $content The content text
-     *
-     * @return void
-     * @throws Exception\InvalidArgumentException
-     */
-    protected function checkContent($content): void
-    {
-        if (!is_string($content) && !is_null($content)) {
-            throw new Exception\InvalidArgumentException('The content must be a string if set');
-        }
-    }
-
-    /**
      * Render html element
      *
      * @param  string $content
      *
      * @return string
      */
-    protected function renderElement($content = null): string
+    protected function renderElement(string $content = null): string
     {
         // Get element parts
         $element    = $this->getElement();
@@ -366,12 +353,9 @@ trait HtmlElementTrait
      */
     protected function htmlAttribs($attribs): string
     {
-        $html           = '';
-        $escapeHtml     = $this->getView()->plugin('escapehtml');
-        $escapeHtmlAttr = $this->getView()->plugin('escapehtmlattr');
-
+        $html = '';
         foreach ((array)$attribs as $key => $value) {
-            $key = $escapeHtml($key);
+            $key = $this->escapeHtml($key);
             $this->cleanHtmlAttribValue($key, $value);
             if (!$value) {
                 continue;
@@ -380,10 +364,10 @@ trait HtmlElementTrait
             switch ($key) {
                 case 'class':
                 case 'href':
-                    $value = $escapeHtml($value);
+                    $value = $this->escapeHtml($value);
                     break;
                 default:
-                    $value = $escapeHtmlAttr($value);
+                    $value = $this->escapeHtmlAttribute($value);
                     break;
             }
 
@@ -405,7 +389,7 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    protected function getKeyValuePair($key, $value): string
+    protected function getKeyValuePair(string $key, string $value): string
     {
         if (strpos($value, '"') !== false) {
             return ' ' . $key . '=\'' . $value . '\'';
@@ -417,11 +401,11 @@ trait HtmlElementTrait
      * Cleans html attribute value accordingly
      *
      * @param  string $key
-     * @param  string $value
+     * @param  mixed  $value
      *
      * @return string
      */
-    protected function cleanHtmlAttribValue($key, $value): string
+    protected function cleanHtmlAttribValue(string $key, $value): string
     {
         return trim($this->getHtmlAttribValue($key, $value));
     }
@@ -430,12 +414,12 @@ trait HtmlElementTrait
      * Get html attribute value
      *
      * @param  string $key
-     * @param  string $value
+     * @param  mixed  $value
      *
      * @return string
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    protected function getHtmlAttribValue($key, $value): string
+    protected function getHtmlAttribValue(string $key, $value): string
     {
         if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
             // Don't escape event attributes; _do_ substitute double quotes with singles

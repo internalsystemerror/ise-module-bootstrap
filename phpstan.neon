@@ -1,6 +1,8 @@
 parameters:
-    autoload_directories:
-        - vendor/zendframework/zend-form/src
     fileExtensions:
         - php
         - php.dist
+    includes:
+        - vendor/phpstan/phpstan-phpunit/extension.neon
+        - vendor/phpstan/phpstan-phpunit/rules.neon
+        - vendor/phpstan/phpstan-strict-rules/rules.neon

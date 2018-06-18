@@ -50,13 +50,13 @@ class Alert extends AbstractTypableHtmlElement
     /**
      * Helper entry point
      *
-     * @param  string $message     The alert text
-     * @param  string $type        Alert level
-     * @param  bool   $dismissible Include a close button
+     * @param  string|null $message     The alert text
+     * @param  string|null $type        Alert level
+     * @param  bool        $dismissible Include a close button
      *
      * @return self|string
      */
-    public function __invoke($message = null, $type = 'info', $dismissible = false)
+    public function __invoke(string $message = null, ?string $type = 'info', bool $dismissible = false)
     {
         if ($message) {
             return $this->render($message, $type, $dismissible);
@@ -72,7 +72,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function success($message, $dismissible = false): string
+    public function success(string $message, bool $dismissible = false): string
     {
         return $this->render($message, 'success', $dismissible);
     }
@@ -85,7 +85,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function info($message, $dismissible = false): string
+    public function info(string $message, bool $dismissible = false): string
     {
         return $this->render($message, 'info', $dismissible);
     }
@@ -98,7 +98,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function warning($message, $dismissible = false): string
+    public function warning(string $message, bool $dismissible = false): string
     {
         return $this->render($message, 'warning', $dismissible);
     }
@@ -111,7 +111,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function danger($message, $dismissible = false): string
+    public function danger(string $message, bool $dismissible = false): string
     {
         return $this->render($message, 'danger', $dismissible);
     }
@@ -125,7 +125,7 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    public function render($message, $type = 'info', $dismissible = false): string
+    public function render(string $message = null, ?string $type = 'info', bool $dismissible = false): string
     {
         if ($dismissible) {
             $message .= $this->renderCloseButton();

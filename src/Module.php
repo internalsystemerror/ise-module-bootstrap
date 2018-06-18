@@ -12,6 +12,7 @@ use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\View\Helper\Navigation;
+use Zend\View\HelperPluginManager;
 
 class Module implements
     BootstrapListenerInterface,
@@ -25,13 +26,15 @@ class Module implements
     public function onBootstrap(EventInterface $event): void
     {
         // Get application
-        $application = $event->getApplication();
+        $application = $event->getTarget();
 
         // Attach dispatch listener events
+        /** @var Listener\DispatchListener $renderListener */
         $renderListener = $application->getServiceManager()->get(Listener\DispatchListener::class);
         $renderListener->attach($application->getEventManager());
 
         // Add navigation view helper
+        /** @var HelperPluginManager $viewManager */
         $viewManager = $application->getServiceManager()->get('ViewHelperManager');
         $navigation  = $viewManager->get(Navigation::class);
         $navigation->getPluginManager()->setInvokableClass('navbar', Navbar::class, true);

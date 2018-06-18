@@ -39,7 +39,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string|self
      */
-    public function __invoke($content = null, $type = '')
+    public function __invoke(string $content = null, string $type = null)
     {
         if ($content) {
             return $this->render($content, $type);
@@ -55,7 +55,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string
      */
-    public function __call($method, $arguments): string
+    public function __call(string $method, array $arguments): string
     {
         // Throw exception if not valid
         $this->checkType($method);
@@ -71,9 +71,9 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return void
      */
-    public function addValidType($validType): void
+    public function addValidType(string $validType): void
     {
-        $this->validTypes[] = (string)$validType;
+        $this->validTypes[] = $validType;
     }
 
     /**
@@ -83,9 +83,9 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return bool
      */
-    public function isValidType($type): bool
+    public function isValidType(string $type): bool
     {
-        return in_array($type, $this->validTypes, true);
+        return in_array($type, $this->validTypes);
     }
 
     /**
@@ -127,9 +127,9 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return void
      */
-    public function setTypePrefix($typePrefix): void
+    public function setTypePrefix(string $typePrefix): void
     {
-        $this->typePrefix = (string)$typePrefix;
+        $this->typePrefix = $typePrefix;
     }
 
     /**
@@ -164,7 +164,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return void
      */
-    public function setType($type): void
+    public function setType(string $type): void
     {
         $this->checkType($type);
         $this->type = $type;
@@ -178,10 +178,9 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string
      */
-    public function render($content, $type = ''): string
+    public function render(string $content = null, string $type = null): string
     {
         // Check variables
-        $this->checkContent($content);
         if (!$type) {
             if ($this->defaultType !== false) {
                 $type = $this->defaultType;
@@ -201,7 +200,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    protected function checkType($type): void
+    protected function checkType(string $type): void
     {
         if (!$this->isValidType($type)) {
             throw new Exception\InvalidArgumentException('"' . $type . '" is not a valid type');

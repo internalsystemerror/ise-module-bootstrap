@@ -49,7 +49,7 @@ class Time extends AbstractHtmlElement
      *
      * @return string
      */
-    public function render($time): string
+    public function render($time = null): string
     {
         $timestamp = $readable = $time;
         if ($time instanceof DateTime) {
