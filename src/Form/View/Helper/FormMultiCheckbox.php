@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
@@ -16,8 +20,12 @@ class FormMultiCheckbox extends FormMultiCheckboxHelper
     /**
      * @inheritDoc
      */
-    protected function renderOptions(MultiCheckbox $element, array $options, array $selectedOptions, array $attributes)
-    {
+    protected function renderOptions(
+        MultiCheckbox $element,
+        array $options,
+        array $selectedOptions,
+        array $attributes
+    ): string {
         foreach ($options as $key => $optionSpec) {
             if (isset($optionSpec['attributes']['disabled'])) {
                 $options[$key]['disabled'] = $optionSpec['attributes']['disabled'];
@@ -26,6 +34,9 @@ class FormMultiCheckbox extends FormMultiCheckboxHelper
                 $options[$key]['selected'] = $optionSpec['attributes']['checked'];
             }
         }
-        return sprintf('<div class="checkbox">%s</div>', parent::renderOptions($element, $options, $selectedOptions, $attributes));
+        return sprintf(
+            '<div class="checkbox">%s</div>',
+            parent::renderOptions($element, $options, $selectedOptions, $attributes)
+        );
     }
 }

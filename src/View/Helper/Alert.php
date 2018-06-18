@@ -1,9 +1,13 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
 /**
- * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ * @SuppressWarnings(PHPMD.boolArgumentFlag)
  */
 class Alert extends AbstractTypableHtmlElement
 {
@@ -46,15 +50,16 @@ class Alert extends AbstractTypableHtmlElement
     /**
      * Helper entry point
      *
-     * @param  string  $message     The alert text
-     * @param  string  $type        Alert level
-     * @param  boolean $dismissable Include a close button
-     * @return Alert
+     * @param  string $message     The alert text
+     * @param  string $type        Alert level
+     * @param  bool   $dismissible Include a close button
+     *
+     * @return self|string
      */
-    public function __invoke($message = '', $type = 'info', $dismissable = false)
+    public function __invoke($message = null, $type = 'info', $dismissible = false)
     {
         if ($message) {
-            return $this->render($message, $type, $dismissable);
+            return $this->render($message, $type, $dismissible);
         }
         return $this;
     }
@@ -62,62 +67,67 @@ class Alert extends AbstractTypableHtmlElement
     /**
      * Render a success alert
      *
-     * @param  string  $message     The alert text
-     * @param  boolean $dismissable Include a close button
+     * @param  string $message     The alert text
+     * @param  bool   $dismissible Include a close button
+     *
      * @return string
      */
-    public function success($message, $dismissable = false)
+    public function success($message, $dismissible = false): string
     {
-        return $this->render($message, 'success', $dismissable);
+        return $this->render($message, 'success', $dismissible);
     }
 
     /**
      * Render an info alert
      *
-     * @param  string  $message     The alert text
-     * @param  boolean $dismissable Include a close button
+     * @param  string $message     The alert text
+     * @param  bool   $dismissible Include a close button
+     *
      * @return string
      */
-    public function info($message, $dismissable = false)
+    public function info($message, $dismissible = false): string
     {
-        return $this->render($message, 'info', $dismissable);
+        return $this->render($message, 'info', $dismissible);
     }
 
     /**
      * Render a warning alert
      *
-     * @param  string  $message     The alert text
-     * @param  boolean $dismissable Include a close button
+     * @param  string $message     The alert text
+     * @param  bool   $dismissible Include a close button
+     *
      * @return string
      */
-    public function warning($message, $dismissable = false)
+    public function warning($message, $dismissible = false): string
     {
-        return $this->render($message, 'warning', $dismissable);
+        return $this->render($message, 'warning', $dismissible);
     }
 
     /**
      * Render a danger alert
      *
-     * @param  string  $message     The alert text
-     * @param  boolean $dismissable Include a close button
+     * @param  string $message     The alert text
+     * @param  bool   $dismissible Include a close button
+     *
      * @return string
      */
-    public function danger($message, $dismissable = false)
+    public function danger($message, $dismissible = false): string
     {
-        return $this->render($message, 'danger', $dismissable);
+        return $this->render($message, 'danger', $dismissible);
     }
 
     /**
      * Render alert
      *
-     * @param  string  $message     The alert text
-     * @param  string  $type        Alert type
-     * @param  boolean $dismissable Include a close button
+     * @param  string $message     The alert text
+     * @param  string $type        Alert type
+     * @param  bool   $dismissible Include a close button
+     *
      * @return string
      */
-    public function render($message, $type = 'info', $dismissable = false)
+    public function render($message, $type = 'info', $dismissible = false): string
     {
-        if ($dismissable) {
+        if ($dismissible) {
             $message .= $this->renderCloseButton();
         }
 
@@ -129,9 +139,9 @@ class Alert extends AbstractTypableHtmlElement
      *
      * @return string
      */
-    protected function renderCloseButton()
+    protected function renderCloseButton(): string
     {
         return '<button type="button" class="close" data-dismiss="alert" '
-            . 'aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+               . 'aria-label="Close"><span aria-hidden="true">&times;</span></button>';
     }
 }

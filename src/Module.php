@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap;
 
@@ -18,7 +22,7 @@ class Module implements
     /**
      * {@inheritDoc}
      */
-    public function onBootstrap(EventInterface $event)
+    public function onBootstrap(EventInterface $event): void
     {
         // Get application
         $application = $event->getApplication();
@@ -36,15 +40,15 @@ class Module implements
     /**
      * {@inheritDoc}
      */
-    public function getConfig()
+    public function getConfig(): array
     {
-        return include realpath(__DIR__ . '/../config/module.config.php');
+        return require __DIR__ . '/../config/module.config.php';
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getModuleDependencies()
+    public function getModuleDependencies(): array
     {
         return [
             'AssetManager',

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
@@ -11,7 +15,7 @@ class FormSelect extends FormSelectHelper
     /**
      * @inheritDoc
      */
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element): string
     {
         $class = '';
         if ($element->hasAttribute('class')) {

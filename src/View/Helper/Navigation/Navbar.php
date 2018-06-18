@@ -1,10 +1,14 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper\Navigation;
 
 use Zend\Navigation\AbstractContainer;
-use Zend\Navigation\Page\AbstractPage;
 use Zend\Navigation\Navigation;
+use Zend\Navigation\Page\AbstractPage;
 use Zend\View\Exception;
 
 /**
@@ -19,17 +23,17 @@ class Navbar extends AbstractNavigation
     const MAX_RENDER_DEPTH = 1;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $inverse = false;
 
     /**
-     * @var boolean|string
+     * @var bool|string
      */
     protected $fixed = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $static = false;
 
@@ -39,12 +43,12 @@ class Navbar extends AbstractNavigation
     protected $brand = '';
 
     /**
-     * @var boolean|string
+     * @var bool|string
      */
     protected $useForm = false;
 
     /**
-     * @var boolean|string|AbstractContainer
+     * @var bool|string|AbstractContainer
      */
     protected $rightMenu = false;
 
@@ -56,23 +60,24 @@ class Navbar extends AbstractNavigation
     /**
      * Set inverse
      *
-     * @param  boolean $inverse Whether to set the class navbar-inverse
-     * @return Navbar
+     * @param  bool $inverse Whether to set the class navbar-inverse
+     *
+     * @return void
      */
-    public function setInverse($inverse)
+    public function setInverse($inverse): void
     {
-        $this->inverse = (boolean) $inverse;
-        return $this;
+        $this->inverse = (bool)$inverse;
     }
 
     /**
      * Set fixed
      *
-     * @param  string|boolean $fixed Whether to set the class navbar-fixed-???
-     * @return Navbar
+     * @param  string|bool $fixed Whether to set the class navbar-fixed-???
+     *
+     * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public function setFixed($fixed)
+    public function setFixed($fixed): void
     {
         if ($fixed !== false) {
             switch ($fixed) {
@@ -87,72 +92,68 @@ class Navbar extends AbstractNavigation
         }
 
         $this->fixed = $fixed;
-        return $this;
     }
 
     /**
      * Set static
      *
-     * @param  boolean $static Whether to set the class navbar-static-top
-     * @return Navbar
+     * @param  bool $static Whether to set the class navbar-static-top
+     *
+     * @return void
      */
-    public function setStatic($static)
+    public function setStatic($static): void
     {
-        $this->static = (boolean) $static;
-        return $this;
+        $this->static = (bool)$static;
     }
 
     /**
      * Set brand
      *
      * @param  string $brand The navbar brand to use
-     * @return Navbar
+     *
+     * @return void
      */
-    public function setBrand($brand)
+    public function setBrand($brand): void
     {
-        $this->brand = (string) $brand;
-        return $this;
+        $this->brand = (string)$brand;
     }
 
     /**
      * Set use form
      *
-     * @param  boolean|string $form Form to use or false for no form
-     * @return Navbar
+     * @param  bool|string $form Form to use or false for no form
+     *
+     * @return void
      */
-    public function setUseForm($form)
+    public function setUseForm($form): void
     {
         $this->useForm = $form;
-        return $this;
     }
 
     /**
      * Set right menu
      *
-     * @param boolean|string|AbstractContainer $container Container to render or
+     * @param bool|string|AbstractContainer $container    Container to render or
      *                                                    false for no menu
-     * @return Navbar
+     *
+     * @return void
      */
-    public function setRightMenu($container)
+    public function setRightMenu($container): void
     {
         if (null === $container) {
-            throw Exception\InvalidArgumentException(
+            throw new Exception\InvalidArgumentException(
                 'Container must be a string alias or an instance of '
                 . 'Zend\Navigation\AbstractContainer'
             );
         }
         $this->parseContainer($container);
         $this->rightMenu = $container;
-        return $this;
     }
 
     /**
-     * Normalise options
-     *
-     * @param  array $options Options to override the defaults
-     * @return array
+     * @inheritdoc
      */
-    protected function normalizeOptions(array $options)
+    protected function normalizeOptions(array $options): array
     {
         return array_merge(parent::normalizeOptions($options), [
             'inverse'   => $this->inverse,
@@ -161,21 +162,17 @@ class Navbar extends AbstractNavigation
             'brand'     => $this->brand,
             'useForm'   => $this->useForm,
             'rightMenu' => $this->rightMenu,
-            ], $options);
+        ], $options);
     }
 
     /**
-     * Render navbar container
-     *
-     * @param  AbstractContainer $container Container to create menu from.
-     * @param  array             $options   Options for controlling rendering
-     * @throws Exception\InvalidArgumentException
+     * @inheritdoc
      */
-    protected function renderNavigation(AbstractContainer $container, array $options)
+    protected function renderNavigation(AbstractContainer $container, array $options): string
     {
         // Start html
         $html = $this->renderNavbarContainerHeader($options)
-            . $this->renderNavbarMenu($container, $options);
+                . $this->renderNavbarMenu($container, $options);
 
         // Add form if applicable
         if ($options['useForm']) {
@@ -196,9 +193,10 @@ class Navbar extends AbstractNavigation
      * Render navbar container header
      *
      * @param  array $options Options for controlling rendering
+     *
      * @return string
      */
-    protected function renderNavbarContainerHeader(array $options)
+    protected function renderNavbarContainerHeader(array $options): string
     {
         $class = $this->createNavbarContainerClass($options);
         $brand = $this->renderBrand($options);
@@ -227,7 +225,7 @@ HTML;
      *
      * @return string
      */
-    protected function renderNavbarContainerFooter()
+    protected function renderNavbarContainerFooter(): string
     {
         return '</div></div></nav>';
     }
@@ -236,9 +234,10 @@ HTML;
      * Render brand
      *
      * @param  array $options Options for controlling rendering
+     *
      * @return string
      */
-    protected function renderBrand(array $options)
+    protected function renderBrand(array $options): string
     {
         $brandLabel = $options['brand'];
         $brandLink  = '#';
@@ -249,7 +248,7 @@ HTML;
             } elseif (isset($options['brand']['uri'])) {
                 $brandLink = $options['brand']['uri'];
             }
-            
+
             $brandLabel = '';
             if (isset($options['brand']['icon'])) {
                 $iconHelper = $this->getIconHelper();
@@ -257,9 +256,9 @@ HTML;
             }
             $brandLabel .= $options['brand']['label'];
         }
-        
+
         return '<a class="navbar-brand" href="' . $brandLink . '">'
-            . $brandLabel . '</a>';
+               . $brandLabel . '</a>';
     }
 
     /**
@@ -267,9 +266,10 @@ HTML;
      *
      * @param  AbstractContainer $container Container to render
      * @param  array             $options   Options for controlling rendering
+     *
      * @return string
      */
-    protected function renderNavbarMenu(AbstractContainer $container, array $options)
+    protected function renderNavbarMenu(AbstractContainer $container, array $options): string
     {
         // Create iterator
         $iterator = new \RecursiveIteratorIterator($container, \RecursiveIteratorIterator::SELF_FIRST);
@@ -284,7 +284,7 @@ HTML;
             }
             // Create navbar page
             $depth = $iterator->getDepth();
-            $html .= $this->renderNavbarMenuPage($page, $options, $depth, $prevDepth);
+            $html  .= $this->renderNavbarMenuPage($page, $options, $depth, $prevDepth);
 
             // Store depth for next iteration
             $prevDepth = $depth;
@@ -308,17 +308,18 @@ HTML;
      * @param  array        $options   Options for controlling rendering
      * @param  integer      $depth     Current iteration depth
      * @param  integer      $prevDepth Previous iteration depth
+     *
      * @return string
      */
-    protected function renderNavbarMenuPage(AbstractPage $page, array $options, $depth, $prevDepth)
+    protected function renderNavbarMenuPage(AbstractPage $page, array $options, $depth, $prevDepth): string
     {
         // Check for depth
         $html = '';
-        
+
         if ($depth > $prevDepth) {
             // Start new ul tag
             $ulClass = $this->createNavbarMenuClass($page, $options['ulClass'], $depth);
-            $html .= '<ul' . $ulClass . '>';
+            $html    .= '<ul' . $ulClass . '>';
         } elseif ($depth < $prevDepth) {
             // Close open li/ul tags until we're at current depth
             for ($i = $prevDepth; $i > $depth; $i--) {
@@ -335,15 +336,15 @@ HTML;
         if ($page->get('divider')) {
             $html .= '<li class="divider"></li>';
         }
-        
+
         // Check if page is empty
         if ($this->isPageEmpty($page)) {
             return $html;
         }
-        
+
         // Add menu item
         $liClass = $this->createNavbarMenuItemClass($page, $options['addClassToLi'], $depth);
-        $html .= '<li' . $liClass . '>' . $this->htmlify(
+        $html    .= '<li' . $liClass . '>' . $this->htmlify(
             $page,
             $options['addClassToLi'],
             $options['iconPosition'],
@@ -352,34 +353,35 @@ HTML;
 
         return $html;
     }
-    
+
     /**
      * Is the page empty?
      *
      * @param  AbstractPage $page Page to check
-     * @return boolean
+     *
+     * @return bool
      */
-    protected function isPageEmpty(AbstractPage $page)
+    protected function isPageEmpty(AbstractPage $page): bool
     {
         if ($page->get('route')) {
             return false;
         }
-        
+
         if (!$page->hasPages(true)) {
             return true;
         }
-        
+
         $isGranted = $this->getView()->plugin('isGranted');
         foreach ($page->getPages() as $childPage) {
             if (!$childPage->isVisible()) {
                 continue;
             }
-            
+
             if ($isGranted($childPage->get('permission'))) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -387,9 +389,10 @@ HTML;
      * Render navbar right aligned menu
      *
      * @param  array $options Options for controlling rendering
+     *
      * @return string
      */
-    protected function renderNavbarRightMenu(array $options)
+    protected function renderNavbarRightMenu(array $options): string
     {
         // Get container to use
         $container = $options['rightMenu'];
@@ -408,10 +411,11 @@ HTML;
      * Render navbar form
      *
      * @param  array $options Options for controlling rendering
+     *
      * @return string
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    protected function renderNavbarForm(array $options)
+    protected function renderNavbarForm(array $options): string
     {
         // Load form (must be ZendForm instance)
         // Load form view helper
@@ -427,10 +431,11 @@ HTML;
      * Create navbar container class
      *
      * @param  array $options Options for controlling rendering
-     * @return array
+     *
+     * @return string
      * @throws Exception\InvalidArgumentException
      */
-    protected function createNavbarContainerClass(array $options)
+    protected function createNavbarContainerClass(array $options): string
     {
         // Create navbar container class
         $containerClass = 'navbar';
@@ -458,10 +463,11 @@ HTML;
      *
      * @param  AbstractPage $page    Page being rendered
      * @param  string       $ulClass The ul class to set,
-     * $param  integer      $depth   Current iteration depth
+     * @param  integer      $depth   Current iteration depth
+     *
      * @return string
      */
-    protected function createNavbarMenuClass(AbstractPage $page, $ulClass, $depth)
+    protected function createNavbarMenuClass(AbstractPage $page, $ulClass, $depth): string
     {
         if ($depth === 0 && $ulClass) {
             return ' class="' . $this->escapeHtmlAttribute($ulClass) . '"';
@@ -476,12 +482,13 @@ HTML;
      * Create navbar menu item class
      *
      * @param  AbstractPage $page         Page being rendered
-     * @param  boolean      $addClassToLi Whether to add the page class to the
+     * @param  bool         $addClassToLi Whether to add the page class to the
      *                                    li, or leave it for the a
-     * $param  integer      $depth        Current iteration depth
+     * @param  integer      $depth        Current iteration depth
+     *
      * @return string
      */
-    protected function createNavbarMenuItemClass(AbstractPage $page, $addClassToLi, $depth)
+    protected function createNavbarMenuItemClass(AbstractPage $page, $addClassToLi, $depth): string
     {
         // Render li tag and page
         $liClasses = [];

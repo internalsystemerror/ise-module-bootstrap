@@ -1,45 +1,49 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 use Ise\Bootstrap\Form\View\Helper as FormHelper;
 use Ise\Bootstrap\View\Helper;
 use Zend\Form\View\Helper as ZendFormHelper;
-use Zend\View\Helper as ZendHelper;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\View\Helper as ZendHelper;
 
 return [
     'aliases'   => [
         /**
          * v2 overrides
          */
-        'form'               => FormHelper\Form::class,
-        'formbutton'         => FormHelper\FormButton::class,
-        'formcheckbox'       => FormHelper\FormCheckbox::class,
-        'formcolor'          => FormHelper\FormColor::class,
-        'formdate'           => FormHelper\FormDate::class,
-        'formdateselect'     => FormHelper\FormDateSelect::class,
-        'formdatetime'       => FormHelper\FormDateTime::class,
-        'formdatetimelocal'  => FormHelper\FormDateTimeLocal::class,
-        'formdatetimeselect' => FormHelper\FormDateTimeSelect::class,
-        'formdescription'    => FormHelper\FormDescription::class,
-        'formelementerrors'  => FormHelper\FormElementErrors::class,
-        'formemail'          => FormHelper\FormEmail::class,
-        'formfile'           => FormHelper\FormFile::class,
-        'formimage'          => FormHelper\FormImage::class,
-        'forminput'          => FormHelper\FormInput::class,
-        'formmonth'          => FormHelper\FormMonth::class,
-        'formmonthselect'    => FormHelper\FormMonthSelect::class,
-        'formmulticheckbox'  => FormHelper\FormMultiCheckbox::class,
-        'formnumber'         => FormHelper\FormNumber::class,
-        'formpassword'       => FormHelper\FormPassword::class,
-        'formrange'          => FormHelper\FormRange::class,
-        'formrow'            => FormHelper\FormRow::class,
-        'formsearch'         => FormHelper\FormSearch::class,
-        'formselect'         => FormHelper\FormSelect::class,
-        'formtel'            => FormHelper\FormTel::class,
-        'formtext'           => FormHelper\FormText::class,
-        'formtime'           => FormHelper\FormTime::class,
-        'formurl'            => FormHelper\FormUrl::class,
-        'formweek'           => FormHelper\FormWeek::class,
+        'form'                                   => FormHelper\Form::class,
+        'formbutton'                             => FormHelper\FormButton::class,
+        'formcheckbox'                           => FormHelper\FormCheckbox::class,
+        'formcolor'                              => FormHelper\FormColor::class,
+        'formdate'                               => FormHelper\FormDate::class,
+        'formdateselect'                         => FormHelper\FormDateSelect::class,
+        'formdatetime'                           => FormHelper\FormDateTime::class,
+        'formdatetimelocal'                      => FormHelper\FormDateTimeLocal::class,
+        'formdatetimeselect'                     => FormHelper\FormDateTimeSelect::class,
+        'formdescription'                        => FormHelper\FormDescription::class,
+        'formelementerrors'                      => FormHelper\FormElementErrors::class,
+        'formemail'                              => FormHelper\FormEmail::class,
+        'formfile'                               => FormHelper\FormFile::class,
+        'formimage'                              => FormHelper\FormImage::class,
+        'forminput'                              => FormHelper\FormInput::class,
+        'formmonth'                              => FormHelper\FormMonth::class,
+        'formmonthselect'                        => FormHelper\FormMonthSelect::class,
+        'formmulticheckbox'                      => FormHelper\FormMultiCheckbox::class,
+        'formnumber'                             => FormHelper\FormNumber::class,
+        'formpassword'                           => FormHelper\FormPassword::class,
+        'formrange'                              => FormHelper\FormRange::class,
+        'formrow'                                => FormHelper\FormRow::class,
+        'formsearch'                             => FormHelper\FormSearch::class,
+        'formselect'                             => FormHelper\FormSelect::class,
+        'formtel'                                => FormHelper\FormTel::class,
+        'formtext'                               => FormHelper\FormText::class,
+        'formtime'                               => FormHelper\FormTime::class,
+        'formurl'                                => FormHelper\FormUrl::class,
+        'formweek'                               => FormHelper\FormWeek::class,
         /**
          * Zend\Form\View\Helper overrides
          */

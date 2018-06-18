@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
@@ -24,6 +28,7 @@ class FormDescription extends AbstractHelper
      * @param  ElementInterface $element
      * @param  string           $blockWrapper
      * @param  string           $inlineWrapper
+     *
      * @return string|self
      */
     public function __invoke(ElementInterface $element = null, $blockWrapper = null, $inlineWrapper = null)
@@ -35,37 +40,25 @@ class FormDescription extends AbstractHelper
     }
 
     /**
-     * Set block wrapper
-     *
-     * @param  string $blockWrapper
-     * @return self
-     */
-    public function setBlockWrapper($blockWrapper)
-    {
-        $this->blockWrapper = (string) $blockWrapper;
-        return $this;
-    }
-
-    /**
      * Get block wrapper
      *
      * @return string
      */
-    public function getBlockWrapper()
+    public function getBlockWrapper(): string
     {
         return $this->blockWrapper;
     }
 
     /**
-     * Set inline wrapper
+     * Set block wrapper
      *
-     * @param string $inlineWrapper
-     * @return self
+     * @param  string $blockWrapper
+     *
+     * @return void
      */
-    public function setInlineWrapper($inlineWrapper)
+    public function setBlockWrapper($blockWrapper): void
     {
-        $this->inlineWrapper = (string) $inlineWrapper;
-        return $this;
+        $this->blockWrapper = (string)$blockWrapper;
     }
 
     /**
@@ -73,9 +66,21 @@ class FormDescription extends AbstractHelper
      *
      * @return string
      */
-    public function getInlineWrapper()
+    public function getInlineWrapper(): string
     {
         return $this->inlineWrapper;
+    }
+
+    /**
+     * Set inline wrapper
+     *
+     * @param string $inlineWrapper
+     *
+     * @return void
+     */
+    public function setInlineWrapper($inlineWrapper): void
+    {
+        $this->inlineWrapper = (string)$inlineWrapper;
     }
 
     /**
@@ -84,9 +89,10 @@ class FormDescription extends AbstractHelper
      * @param  ElementInterface $element
      * @param  string           $blockWrapper
      * @param  string           $inlineWrapper
+     *
      * @return string
      */
-    public function render(ElementInterface $element, $blockWrapper = null, $inlineWrapper = null)
+    public function render(ElementInterface $element, $blockWrapper = null, $inlineWrapper = null): string
     {
         $html   = '';
         $inline = $element->getOption('help-inline');

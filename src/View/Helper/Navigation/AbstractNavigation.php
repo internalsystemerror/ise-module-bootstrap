@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper\Navigation;
 
@@ -6,8 +10,8 @@ use Ise\Bootstrap\View\Helper\HtmlElementTrait;
 use Ise\Bootstrap\View\Helper\Icon;
 use Zend\Navigation\AbstractContainer;
 use Zend\Navigation\Page\AbstractPage;
-use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 use Zend\View\Exception;
+use Zend\View\Helper\Navigation\AbstractHelper as AbstractNavigationHelper;
 
 abstract class AbstractNavigation extends AbstractNavigationHelper
 {
@@ -35,7 +39,7 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
     protected $ulClass = 'nav';
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $addClassToLi = false;
 
@@ -48,7 +52,8 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Helper entry point
      *
      * @param  string|AbstractContainer $container Container to operate on
-     * @return Navbar
+     *
+     * @return self
      */
     public function __invoke($container = null)
     {
@@ -62,34 +67,35 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Set ul class
      *
      * @param  string $ulClass Class to give to the main menu ul
-     * @return Navbar
+     *
+     * @return void
      */
-    public function setUlClass($ulClass)
+    public function setUlClass($ulClass): void
     {
-        $this->ulClass = (string) $ulClass;
-        return $this;
+        $this->ulClass = (string)$ulClass;
     }
 
     /**
      * Set add class to li
      *
-     * @param  boolean $addClassToLi Whether to add the page class to the li, or
+     * @param  bool $addClassToLi    Whether to add the page class to the li, or
      *                               leave it for the a
-     * @return Navbar
+     *
+     * @return void
      */
-    public function setAddClassToLi($addClassToLi)
+    public function setAddClassToLi($addClassToLi): void
     {
-        $this->addClassToLi = (boolean) $addClassToLi;
-        return $this;
+        $this->addClassToLi = (bool)$addClassToLi;
     }
 
     /**
      * Set add class to li
      *
-     * @param  boolean $iconPosition Icon position
-     * @return Navbar
+     * @param  bool $iconPosition Icon position
+     *
+     * @return void
      */
-    public function setIconPosition($iconPosition)
+    public function setIconPosition($iconPosition): void
     {
         switch ($iconPosition) {
             case self::ICON_PREPEND:
@@ -99,10 +105,14 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
             default:
                 throw new Exception\InvalidArgumentException('Invalid icon position given');
         }
-        return $this;
     }
 
-    public function getIconHelper()
+    /**
+     * Get icon helper
+     *
+     * @return Icon
+     */
+    public function getIconHelper(): Icon
     {
         if (!$this->iconHelper) {
             $this->iconHelper = $this->getView()->plugin('icon');
@@ -118,15 +128,16 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * Implements {@link HelperInterface::render()}.
      *
-     * @param  AbstractContainer $container [Optional] Container to create menu
+     * @param  AbstractContainer $container  [Optional] Container to create menu
      *                                       from. Default is to use the
      *                                       container retrieved from
      *                                       {@link getContainer()}.
-     * @param  array             $options   [Optional] Options for controlling
+     * @param  array             $options    [Optional] Options for controlling
      *                                       rendering
+     *
      * @return string
      */
-    public function render($container = null, array $options = [])
+    public function render($container = null, array $options = []): string
     {
         // Set up variables
         $this->parseContainer($container);
@@ -142,21 +153,22 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Returns an HTML string containing an 'a' element for the given page
      *
      * @param  AbstractPage $page         Page to render
-     * @param  boolean      $addClassToLi Whether to add the page class to the
+     * @param  bool         $addClassToLi Whether to add the page class to the
      *                                    li, or leave it for the element
      * @param  integer      $iconPosition Prepend or append the icon (if given)
-     * @param  boolean      $isLast       Whether element should be considered
+     * @param  bool         $isLast       Whether element should be considered
      *                                    the last child
+     *
      * @return string
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @SuppressWarnings(PHPMD.boolArgumentFlag)
      */
     public function htmlify(
         AbstractPage $page,
         $addClassToLi = false,
         $iconPosition = self::ICON_PREPEND,
         $isLast = false
-    ) {
-    
+    ): string {
+
         // Render elements
         $this->setupAttributes($page, $addClassToLi, $isLast);
         $icon  = $this->renderIcon($page);
@@ -171,8 +183,17 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
         // Finish html
         return $this->renderElement($content);
     }
-    
-    protected function renderContent($icon, $label, $iconPosition)
+
+    /**
+     * Render content
+     *
+     * @param $icon
+     * @param $label
+     * @param $iconPosition
+     *
+     * @return string
+     */
+    protected function renderContent($icon, $label, $iconPosition): string
     {
         if ($iconPosition === self::ICON_PREPEND) {
             return $icon . ' ' . $label;
@@ -186,17 +207,19 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Setup attributes
      *
      * @param  AbstractPage $page
-     * @param  boolean      $addClassToLi
-     * @return string
+     * @param  bool         $addClassToLi
+     * @param  bool         $isLast
+     *
+     * @return void
      */
-    protected function setupAttributes(AbstractPage $page, $addClassToLi, $isLast)
+    protected function setupAttributes(AbstractPage $page, $addClassToLi, $isLast): void
     {
         // Set up element
         $this->setElement('a');
         $this->setId($page->getId());
         $this->setClass([]);
         $this->setAttributes([
-            'title' => $this->translate($page->getTitle(), $page->getTextDomain())
+            'title' => $this->translate($page->getTitle(), $page->getTextDomain()),
         ]);
 
         // Set class
@@ -212,15 +235,16 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
             $this->setAttribute('data-toggle', 'dropdown');
         }
     }
-    
+
     /**
      * Setup button
      *
-     * @param string $button
+     * @param string       $button
      * @param AbstractPage $page
-     * @return null
+     *
+     * @return void
      */
-    protected function setupButton($button, $page)
+    protected function setupButton($button, $page): void
     {
         if ($button) {
             $this->setElement('button');
@@ -230,9 +254,9 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
             $this->setAttribute('type', 'button');
             return;
         }
-        
+
         // Add href
-        $href = $page->getHref() ? : '#';
+        $href = $page->getHref() ?: '#';
         if ($href !== '#') {
             $this->setAttribute('target', $page->getTarget());
         }
@@ -243,13 +267,14 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Render page icon
      *
      * @param  AbstractPage $page Page to render icon for
+     *
      * @return string
      */
-    protected function renderIcon($page)
+    protected function renderIcon($page): string
     {
         $icon = $page->get('icon');
         if (!$icon) {
-            return;
+            return '';
         }
         $iconHelper = $this->getIconHelper();
         return $iconHelper($icon);
@@ -259,9 +284,10 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Render page label
      *
      * @param  AbstractPage $page Page to render label for
+     *
      * @return string
      */
-    protected function renderLabel(AbstractPage $page)
+    protected function renderLabel(AbstractPage $page): string
     {
         $label = $this->translate($page->getLabel(), $page->getTextDomain());
         return $this->escapeHtml($label);
@@ -271,15 +297,16 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      * Normalise options
      *
      * @param  array $options Options to override the defaults
+     *
      * @return array
      */
-    protected function normalizeOptions(array $options)
+    protected function normalizeOptions(array $options): array
     {
         return array_merge([
             'ulClass'      => $this->ulClass,
             'addClassToLi' => $this->addClassToLi,
             'iconPosition' => $this->iconPosition,
-            ], $options);
+        ], $options);
     }
 
     /**
@@ -287,7 +314,9 @@ abstract class AbstractNavigation extends AbstractNavigationHelper
      *
      * @param  AbstractContainer $container Container to create html from.
      * @param  array             $options   Options for controlling rendering
+     *
+     * @return string
      * @throws Exception\InvalidArgumentException
      */
-    abstract protected function renderNavigation(AbstractContainer $container, array $options);
+    abstract protected function renderNavigation(AbstractContainer $container, array $options): string;
 }

@@ -1,33 +1,23 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Factory;
 
 use Interop\Container\ContainerInterface;
 use Ise\Bootstrap\Listener\DispatchListener;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class DispatchListenerFactory implements FactoryInterface
 {
     /**
-     * Create the DispatchListener instance
-     *
-     * @param ContainerInterface $container
-     * @param type $requestedName
-     * @return DispatchListener
+     * @inheritdoc
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): DispatchListener
     {
         return new $requestedName($container->get('ViewRenderer'));
-    }
-    
-    /**
-     * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator, $name = null, $requestedName = null)
-    {
-        return $this($serviceLocator, $requestedName);
     }
 }

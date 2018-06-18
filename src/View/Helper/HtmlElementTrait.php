@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
@@ -47,7 +51,8 @@ trait HtmlElementTrait
      * Helper entry point
      *
      * @param  string|null $content The content text
-     * @return self
+     *
+     * @return self|string
      */
     public function __invoke($content = null)
     {
@@ -61,9 +66,10 @@ trait HtmlElementTrait
      * Render element
      *
      * @param  string|null $content The content text
+     *
      * @return string
      */
-    public function render($content)
+    public function render($content): string
     {
         // Check content
         $this->checkContent($content);
@@ -76,9 +82,10 @@ trait HtmlElementTrait
      * Escape html using view helper
      *
      * @param  string $text
+     *
      * @return string
      */
-    public function escapeHtml($text)
+    public function escapeHtml($text): string
     {
         if (!$this->escapeHtmlHelper) {
             $this->escapeHtmlHelper = $this->getView()->plugin('escapehtml');
@@ -93,9 +100,10 @@ trait HtmlElementTrait
      * Escape html attribute using view helper
      *
      * @param  string $attribute
+     *
      * @return string
      */
-    public function escapeHtmlAttribute($attribute)
+    public function escapeHtmlAttribute($attribute): string
     {
         if (!$this->escapeHtmlAttrHelper) {
             $this->escapeHtmlAttrHelper = $this->getView()->plugin('escapehtmlattr');
@@ -107,37 +115,25 @@ trait HtmlElementTrait
     }
 
     /**
-     * Set element
-     *
-     * @param  string $element
-     * @return self
-     */
-    public function setElement($element)
-    {
-        $this->element = (string) $element;
-        return $this;
-    }
-
-    /**
      * Get element
      *
      * @return string
      */
-    public function getElement()
+    public function getElement(): string
     {
         return $this->element;
     }
 
     /**
-     * Set element id
+     * Set element
      *
-     * @param  string $id
-     * @return self
+     * @param  string $element
+     *
+     * @return void
      */
-    public function setId($id)
+    public function setElement($element): void
     {
-        $this->id = (string) $id;
-        return $this;
+        $this->element = (string)$element;
     }
 
     /**
@@ -145,48 +141,48 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * Set element id
+     *
+     * @param  string $id
+     *
+     * @return void
+     */
+    public function setId($id): void
+    {
+        $this->id = (string)$id;
     }
 
     /**
      * Add a class to this element
      *
      * @param  string $class
-     * @return self
+     *
+     * @return void
      */
-    public function addClass($class)
+    public function addClass($class): void
     {
-        $this->class[] = (string) $class;
-        return $this;
+        $this->class[] = (string)$class;
     }
 
     /**
      * Remove a class from this element
      *
      * @param  string $class
-     * @return self
+     *
+     * @return void
      */
-    public function removeClass($class)
+    public function removeClass($class): void
     {
-        $index = array_search((string) $class, $this->class);
+        $index = array_search((string)$class, $this->class);
         if ($index !== false) {
             unset($this->class[$index]);
         }
-        return $this;
-    }
-
-    /**
-     * Set class array
-     *
-     * @param  string[] $class
-     * @return self
-     */
-    public function setClass(array $class)
-    {
-        $this->class = $class;
-        return $this;
     }
 
     /**
@@ -194,9 +190,21 @@ trait HtmlElementTrait
      *
      * @return string[]
      */
-    public function getClass()
+    public function getClass(): array
     {
         return $this->class;
+    }
+
+    /**
+     * Set class array
+     *
+     * @param  string[] $class
+     *
+     * @return void
+     */
+    public function setClass(array $class): void
+    {
+        $this->class = $class;
     }
 
     /**
@@ -204,7 +212,7 @@ trait HtmlElementTrait
      *
      * @return string
      */
-    public function getClassAsString()
+    public function getClassAsString(): string
     {
         return $this->escapeHtmlAttribute(implode(' ', $this->getClass()));
     }
@@ -213,25 +221,26 @@ trait HtmlElementTrait
      * Set an attribute on this element
      *
      * @param  string $key
-     * @param  string $valueue
-     * @return self
+     * @param  string $value
+     *
+     * @return void
      */
-    public function setAttribute($key, $valueue)
+    public function setAttribute($key, $value): void
     {
         if ($key === 'class') {
-            $this->setClass([$valueue]);
+            $this->setClass([$value]);
         }
-        $this->attributes[$key] = $valueue;
-        return $this;
+        $this->attributes[$key] = $value;
     }
 
     /**
      * Remove an attribute from this element
      *
      * @param  string $key
-     * @return self
+     *
+     * @return void
      */
-    public function removeAttribute($key)
+    public function removeAttribute($key): void
     {
         if (isset($this->attributes[$key])) {
             if ($key === 'class') {
@@ -239,36 +248,19 @@ trait HtmlElementTrait
             }
             unset($this->attributes[$key]);
         }
-        return $this;
-    }
-
-    /**
-     * Set attribute associative array
-     *
-     * @param  string[] $attributes
-     * @return self
-     */
-    public function setAttributes($attributes)
-    {
-        if (isset($attributes['class'])) {
-            $class = $attributes['class'];
-            $this->setClass([$class]);
-            unset($attributes['class']);
-        }
-        $this->attributes = $attributes;
-        return $this;
     }
 
     /**
      * Get single attribute for this element
      *
      * @param  string $key
+     *
      * @return string
      */
-    public function getAttribute($key)
+    public function getAttribute($key): string
     {
         if ($key === 'class') {
-            return $this->getClass();
+            return $this->getClassAsString();
         }
         return $this->attributes[$key];
     }
@@ -278,7 +270,7 @@ trait HtmlElementTrait
      *
      * @return string[]
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         $id         = $this->getId();
         $attributes = $this->attributes;
@@ -293,11 +285,28 @@ trait HtmlElementTrait
     }
 
     /**
+     * Set attribute associative array
+     *
+     * @param  string[] $attributes
+     *
+     * @return void
+     */
+    public function setAttributes($attributes): void
+    {
+        if (isset($attributes['class'])) {
+            $class = $attributes['class'];
+            $this->setClass([$class]);
+            unset($attributes['class']);
+        }
+        $this->attributes = $attributes;
+    }
+
+    /**
      * Get element attributes as a string
      *
      * @return string
      */
-    public function getAttributesAsString()
+    public function getAttributesAsString(): string
     {
         return $this->htmlAttribs($this->getAttributes());
     }
@@ -306,9 +315,11 @@ trait HtmlElementTrait
      * Checks the content
      *
      * @param  string|null $content The content text
+     *
+     * @return void
      * @throws Exception\InvalidArgumentException
      */
-    protected function checkContent($content)
+    protected function checkContent($content): void
     {
         if (!is_string($content) && !is_null($content)) {
             throw new Exception\InvalidArgumentException('The content must be a string if set');
@@ -319,9 +330,10 @@ trait HtmlElementTrait
      * Render html element
      *
      * @param  string $content
+     *
      * @return string
      */
-    protected function renderElement($content = null)
+    protected function renderElement($content = null): string
     {
         // Get element parts
         $element    = $this->getElement();
@@ -348,17 +360,17 @@ trait HtmlElementTrait
      * @access public
      *
      * @param array $attribs From this array, each key-value pair is
-     * converted to an attribute name and value.
+     *                       converted to an attribute name and value.
      *
      * @return string The XHTML for the attributes.
      */
-    protected function htmlAttribs($attribs)
+    protected function htmlAttribs($attribs): string
     {
         $html           = '';
         $escapeHtml     = $this->getView()->plugin('escapehtml');
         $escapeHtmlAttr = $this->getView()->plugin('escapehtmlattr');
 
-        foreach ((array) $attribs as $key => $value) {
+        foreach ((array)$attribs as $key => $value) {
             $key = $escapeHtml($key);
             $this->cleanHtmlAttribValue($key, $value);
             if (!$value) {
@@ -378,21 +390,22 @@ trait HtmlElementTrait
             if ('id' == $key) {
                 $value = $this->normalizeId($value);
             }
-            
+
             $html .= $this->getKeyValuePair($key, $value);
         }
 
         return $html;
     }
-    
+
     /**
      * Get key value pair string
      *
      * @param  string $key   The parameter key
      * @param  string $value The parameter value
+     *
      * @return string
      */
-    protected function getKeyValuePair($key, $value)
+    protected function getKeyValuePair($key, $value): string
     {
         if (strpos($value, '"') !== false) {
             return ' ' . $key . '=\'' . $value . '\'';
@@ -405,22 +418,24 @@ trait HtmlElementTrait
      *
      * @param  string $key
      * @param  string $value
+     *
      * @return string
      */
-    protected function cleanHtmlAttribValue($key, $value)
+    protected function cleanHtmlAttribValue($key, $value): string
     {
         return trim($this->getHtmlAttribValue($key, $value));
     }
-    
+
     /**
      * Get html attribute value
      *
      * @param  string $key
      * @param  string $value
+     *
      * @return string
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    protected function getHtmlAttribValue($key, $value)
+    protected function getHtmlAttribValue($key, $value): string
     {
         if (('on' == substr($key, 0, 2)) || ('constraints' == $key)) {
             // Don't escape event attributes; _do_ substitute double quotes with singles
@@ -430,11 +445,11 @@ trait HtmlElementTrait
             }
             return $value;
         }
-        
+
         if (is_array($value)) {
             return implode(' ', $value);
         }
-        
+
         return $value;
     }
 }

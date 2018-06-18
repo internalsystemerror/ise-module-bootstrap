@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
@@ -8,13 +12,9 @@ trait FormInputTrait
 {
 
     /**
-     * Render a form <input> element from the provided $element
-     *
-     * @param  ElementInterface $element
-     * @throws Exception\DomainException
-     * @return string
+     * @inheritdoc
      */
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element): string
     {
         // Set class
         $class = $element->getAttribute('class');

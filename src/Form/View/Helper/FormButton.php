@@ -1,10 +1,15 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
 use Ise\Bootstrap\View\Helper\Icon;
 use Zend\Form\ElementInterface;
 use Zend\Form\Exception;
+use Zend\Form\LabelAwareInterface;
 use Zend\Form\View\Helper\FormButton as ZendFormButton;
 
 class FormButton extends ZendFormButton
@@ -12,7 +17,13 @@ class FormButton extends ZendFormButton
 
     const TYPE_DEFAULT = 'default';
     const TYPES        = [
-        'default', 'primary', 'success', 'info', 'warning', 'danger', 'link',
+        'default',
+        'primary',
+        'success',
+        'info',
+        'warning',
+        'danger',
+        'link',
     ];
 
     /**
@@ -41,7 +52,7 @@ class FormButton extends ZendFormButton
     /**
      * {@inheritDoc}
      */
-    public function render(ElementInterface $element, $buttonContent = null)
+    public function render(ElementInterface $element, $buttonContent = null): string
     {
         // Setup button
         $this->setElementClass($element);
@@ -53,7 +64,7 @@ class FormButton extends ZendFormButton
         // Render button
         $openTag = $this->openTag($element);
         if (null === $buttonContent) {
-            $buttonContent = $element->getLabel() ? : $element->getValue();
+            $buttonContent = $element->getLabel() ?: $element->getValue();
             if (null === $buttonContent) {
                 throw new Exception\DomainException(sprintf(
                     '%s expects either button content as the second argument, ' .
@@ -83,7 +94,7 @@ class FormButton extends ZendFormButton
     /**
      * {@inheritDoc}
      */
-    public function openTag($attributesOrElement = null)
+    public function openTag($attributesOrElement = null): string
     {
         if (null === $attributesOrElement) {
             return '<button>';
@@ -134,14 +145,14 @@ class FormButton extends ZendFormButton
      * Get icon helper
      *
      * @return Icon
-     * @throws Exception\RuntimeException
+     * @throws Exception\ExtensionNotLoadedException
      */
-    public function getIconHelper()
+    public function getIconHelper(): Icon
     {
         if (!$this->iconHelper) {
             $this->iconHelper = $this->getView()->plugin('icon');
             if (!$this->iconHelper instanceof Icon) {
-                throw new Exception\RuntimeException('Helper not loaded: icon');
+                throw new Exception\ExtensionNotLoadedException('Helper not loaded: icon');
             }
         }
         return $this->iconHelper;
@@ -151,9 +162,10 @@ class FormButton extends ZendFormButton
      * Render element icon
      *
      * @param  ElementInterface $element
+     *
      * @return string
      */
-    protected function renderElementIcon(ElementInterface $element)
+    protected function renderElementIcon(ElementInterface $element): string
     {
         $render = '';
         $icon   = $element->getOption('icon');
@@ -168,12 +180,14 @@ class FormButton extends ZendFormButton
      * Set element class
      *
      * @param  ElementInterface $element
+     *
+     * @return void
      * @throws Exception\DomainException
      */
-    protected function setElementClass(ElementInterface $element)
+    protected function setElementClass(ElementInterface $element): void
     {
         $class = $element->getAttribute('class');
-        $type  = $element->getOption('type') ? : self::TYPE_DEFAULT;
+        $type  = $element->getOption('type') ?: self::TYPE_DEFAULT;
 
         if (!in_array($type, self::TYPES, true)) {
             throw new Exception\DomainException(sprintf(

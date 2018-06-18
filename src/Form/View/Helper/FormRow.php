@@ -1,11 +1,15 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
-use Zend\Form\ElementInterface;
 use Zend\Form\Element\Button as ButtonElement;
 use Zend\Form\Element\Radio as RadioElement;
 use Zend\Form\Element\Submit as SubmitElement;
+use Zend\Form\ElementInterface;
 use Zend\Form\View\Helper\FormRow as FormRowHelper;
 
 /**
@@ -15,7 +19,7 @@ class FormRow extends FormRowHelper
 {
 
     /**
-     * @var SxBootstrap\View\Helper\Bootstrap\FormDescription
+     * @var FormDescription
      */
     protected $descriptionHelper;
 
@@ -39,6 +43,7 @@ class FormRow extends FormRowHelper
      * @param  null|bool             $renderErrors
      * @param  null|string           $groupWrapper
      * @param  null|string           $controlWrapper
+     *
      * @return string|FormRow
      */
     public function __invoke(
@@ -48,7 +53,7 @@ class FormRow extends FormRowHelper
         $groupWrapper = null,
         $controlWrapper = null
     ) {
-    
+
         if (!$element) {
             return $this;
         }
@@ -56,7 +61,7 @@ class FormRow extends FormRowHelper
         if ($labelPosition === null) {
             $labelPosition = self::LABEL_PREPEND;
         }
-        
+
         $this->setLabelPosition($labelPosition);
 
         if ($renderErrors !== null) {
@@ -67,24 +72,11 @@ class FormRow extends FormRowHelper
     }
 
     /**
-     * Set description helper
-     *
-     * @param  FormDescription $descriptionHelper
-     * @return FormElement
-     */
-    public function setDescriptionHelper(FormDescription $descriptionHelper)
-    {
-        $descriptionHelper->setView($this->getView());
-        $this->descriptionHelper = $descriptionHelper;
-        return $this;
-    }
-
-    /**
      * Get description helper
      *
      * @return FormDescription
      */
-    public function getDescriptionHelper()
+    public function getDescriptionHelper(): FormDescription
     {
         if (!$this->descriptionHelper) {
             $this->setDescriptionHelper($this->view->plugin('formdescription'));
@@ -93,15 +85,16 @@ class FormRow extends FormRowHelper
     }
 
     /**
-     * Set group wrapper
+     * Set description helper
      *
-     * @param  string $groupWrapper
-     * @return FormElement
+     * @param  FormDescription $descriptionHelper
+     *
+     * @return void
      */
-    public function setGroupWrapper($groupWrapper)
+    public function setDescriptionHelper(FormDescription $descriptionHelper): void
     {
-        $this->groupWrapper = (string) $groupWrapper;
-        return $this;
+        $descriptionHelper->setView($this->getView());
+        $this->descriptionHelper = $descriptionHelper;
     }
 
     /**
@@ -109,21 +102,21 @@ class FormRow extends FormRowHelper
      *
      * @return string
      */
-    public function getGroupWrapper()
+    public function getGroupWrapper(): string
     {
         return $this->groupWrapper;
     }
 
     /**
-     * Set control wrapper
+     * Set group wrapper
      *
-     * @param  string $controlWrapper
-     * @return FormElement
+     * @param  string $groupWrapper
+     *
+     * @return void
      */
-    public function setControlWrapper($controlWrapper)
+    public function setGroupWrapper($groupWrapper): void
     {
-        $this->controlWrapper = (string) $controlWrapper;
-        return $this;
+        $this->groupWrapper = (string)$groupWrapper;
     }
 
     /**
@@ -131,9 +124,21 @@ class FormRow extends FormRowHelper
      *
      * @return string
      */
-    public function getControlWrapper()
+    public function getControlWrapper(): string
     {
         return $this->controlWrapper;
+    }
+
+    /**
+     * Set control wrapper
+     *
+     * @param  string $controlWrapper
+     *
+     * @return void
+     */
+    public function setControlWrapper($controlWrapper): void
+    {
+        $this->controlWrapper = (string)$controlWrapper;
     }
 
     /**
@@ -142,9 +147,10 @@ class FormRow extends FormRowHelper
      * @param  ElementInterface $element
      * @param  string           $groupWrapper
      * @param  string           $controlWrapper
+     *
      * @return string
      */
-    public function render(ElementInterface $element, $groupWrapper = null, $controlWrapper = null)
+    public function render(ElementInterface $element, $groupWrapper = null, $controlWrapper = null): string
     {
         $renderer = $this->getElementHelper()->getView();
         if (method_exists($renderer, 'plugin') && $element instanceof RadioElement) {
@@ -168,9 +174,10 @@ class FormRow extends FormRowHelper
      * Render group
      *
      * @param ElementInterface $element
-     * @param string $elementString
-     * @param string $groupWrapper
-     * @param string $controlWrapper
+     * @param string           $elementString
+     * @param string           $groupWrapper
+     * @param string           $controlWrapper
+     *
      * @return string
      */
     public function renderGroup(
@@ -178,9 +185,9 @@ class FormRow extends FormRowHelper
         $elementString,
         $groupWrapper = null,
         $controlWrapper = null
-    ) {
-    
-        $id      = $element->getAttribute('id') ? : $element->getAttribute('name');
+    ): string {
+
+        $id      = $element->getAttribute('id') ?: $element->getAttribute('name');
         $control = $this->renderControl($element, $elementString, $id, $controlWrapper);
         return $this->renderGroupWrapper($element, $id, $control, $groupWrapper);
     }
@@ -189,19 +196,20 @@ class FormRow extends FormRowHelper
      * Render label
      *
      * @param ElementInterface $element
+     *
      * @return string|null
      */
-    protected function renderLabel(ElementInterface $element)
+    protected function renderLabel(ElementInterface $element): string
     {
         $label = $element->getLabel();
         if (null === $label) {
-            $label = $element->getOption('label') ? : $element->getAttribute('label');
+            $label = $element->getOption('label') ?: $element->getAttribute('label');
         }
         if ($label) {
             $element->setLabelAttributes(['class' => 'control-label']);
             return $this->getLabelHelper()->__invoke($element, $label);
         }
-        return null;
+        return '';
     }
 
     /**
@@ -211,9 +219,10 @@ class FormRow extends FormRowHelper
      * @param  string           $elementString
      * @param  string           $id
      * @param  string           $controlWrapper
+     *
      * @return string
      */
-    protected function renderControl(ElementInterface $element, $elementString, $id, $controlWrapper = null)
+    protected function renderControl(ElementInterface $element, $elementString, $id, $controlWrapper = null): string
     {
         $description = $this->getDescriptionHelper()->render($element);
         $label       = $this->renderLabel($element);
@@ -237,9 +246,10 @@ class FormRow extends FormRowHelper
      * @param  string           $id
      * @param  string           $control
      * @param  string           $wrapper
+     *
      * @return string
      */
-    protected function renderGroupWrapper(ElementInterface $element, $id, $control, $wrapper = null)
+    protected function renderGroupWrapper(ElementInterface $element, $id, $control, $wrapper = null): string
     {
         if (!$wrapper) {
             $wrapper = $this->groupWrapper;
@@ -256,9 +266,10 @@ class FormRow extends FormRowHelper
      * @param  string           $elementString
      * @param  string           $description
      * @param  string           $wrapper
+     *
      * @return string
      */
-    protected function renderControlWrapper($id, $element, $elementString, $description, $wrapper = null)
+    protected function renderControlWrapper($id, $element, $elementString, $description, $wrapper = null): string
     {
         if (!$wrapper) {
             if ($element instanceof ButtonElement || $element instanceof SubmitElement) {

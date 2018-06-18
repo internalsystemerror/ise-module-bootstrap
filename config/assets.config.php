@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap;
 
@@ -58,11 +62,11 @@ return [
             ['service' => __NAMESPACE__ . '\Compressor\Css'],
         ],
     ],
-    'caching' => [
+    'caching'          => [
         'default' => [
-            'cache' => 'Filesystem',
+            'cache'   => 'Filesystem',
             'options' => [
-                'dir' => realpath('data/cache/assets')
+                'dir' => realpath('data/cache/assets'),
             ],
         ],
     ],

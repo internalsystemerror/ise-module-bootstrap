@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
@@ -27,7 +31,8 @@ class Time extends AbstractHtmlElement
      * Helper entry point
      *
      * @param  string|DateTime $time The time to render
-     * @return self
+     *
+     * @return self|string
      */
     public function __invoke($time = null)
     {
@@ -41,9 +46,10 @@ class Time extends AbstractHtmlElement
      * Render time
      *
      * @param  string|DateTime $time The time to render
+     *
      * @return string
      */
-    public function render($time)
+    public function render($time): string
     {
         $timestamp = $readable = $time;
         if ($time instanceof DateTime) {

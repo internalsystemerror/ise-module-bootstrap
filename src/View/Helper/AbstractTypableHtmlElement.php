@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
@@ -32,6 +36,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @param  string $content The content text
      * @param  string $type    Label level
+     *
      * @return string|self
      */
     public function __invoke($content = null, $type = '')
@@ -46,10 +51,11 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      * Magic call method, proxies to render
      *
      * @param  string $method
-     * @param  array $arguments
+     * @param  array  $arguments
+     *
      * @return string
      */
-    public function __call($method, $arguments)
+    public function __call($method, $arguments): string
     {
         // Throw exception if not valid
         $this->checkType($method);
@@ -62,33 +68,22 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      * Add a valid type
      *
      * @param  string $validType Valid type to add
-     * @return self
-     */
-    public function addValidType($validType)
-    {
-        $this->validTypes[] = (string) $validType;
-        return $this;
-    }
-
-    /**
-     * Set the valid types
      *
-     * @param  string[] $validTypes Indexed array of valid types
-     * @return self
+     * @return void
      */
-    public function setValidTypes(array $validTypes)
+    public function addValidType($validType): void
     {
-        $this->validTypes = $validTypes;
-        return $this;
+        $this->validTypes[] = (string)$validType;
     }
 
     /**
      * Is type valid for this element
      *
      * @param  string $type The element type
-     * @return boolean
+     *
+     * @return bool
      */
-    public function isValidType($type)
+    public function isValidType($type): bool
     {
         return in_array($type, $this->validTypes, true);
     }
@@ -98,21 +93,21 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string[]
      */
-    public function getValidTypes()
+    public function getValidTypes(): array
     {
         return $this->validTypes;
     }
 
     /**
-     * Set type prefix
+     * Set the valid types
      *
-     * @param  string $typePrefix
-     * @return self
+     * @param  string[] $validTypes Indexed array of valid types
+     *
+     * @return void
      */
-    public function setTypePrefix($typePrefix)
+    public function setValidTypes(array $validTypes): void
     {
-        $this->typePrefix = (string) $typePrefix;
-        return $this;
+        $this->validTypes = $validTypes;
     }
 
     /**
@@ -120,22 +115,21 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string
      */
-    public function getTypePrefix()
+    public function getTypePrefix(): string
     {
         return $this->typePrefix;
     }
 
     /**
-     * Set type
+     * Set type prefix
      *
-     * @param  string $type
-     * @return self
+     * @param  string $typePrefix
+     *
+     * @return void
      */
-    public function setType($type)
+    public function setTypePrefix($typePrefix): void
     {
-        $this->checkType($type);
-        $this->type = $type;
-        return $this;
+        $this->typePrefix = (string)$typePrefix;
     }
 
     /**
@@ -143,7 +137,7 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string[]
      */
-    public function getClass()
+    public function getClass(): array
     {
         $type  = $this->getType();
         $class = $this->class;
@@ -158,9 +152,22 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param  string $type
+     *
+     * @return void
+     */
+    public function setType($type): void
+    {
+        $this->checkType($type);
+        $this->type = $type;
     }
 
     /**
@@ -168,9 +175,10 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      *
      * @param  string $content The content text
      * @param  string $type    Label type
+     *
      * @return string
      */
-    public function render($content, $type = '')
+    public function render($content, $type = ''): string
     {
         // Check variables
         $this->checkContent($content);
@@ -189,9 +197,11 @@ abstract class AbstractTypableHtmlElement extends AbstractHtmlElement
      * Checks the type
      *
      * @param  string $type Element type
+     *
+     * @return void
      * @throws Exception\InvalidArgumentException
      */
-    protected function checkType($type)
+    protected function checkType($type): void
     {
         if (!$this->isValidType($type)) {
             throw new Exception\InvalidArgumentException('"' . $type . '" is not a valid type');

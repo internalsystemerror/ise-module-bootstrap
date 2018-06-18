@@ -1,10 +1,14 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Form\View\Helper;
 
-use Zend\Form\View\Helper\Form as FormHelper;
 use Zend\Form\FieldsetInterface;
 use Zend\Form\FormInterface;
+use Zend\Form\View\Helper\Form as FormHelper;
 
 class Form extends FormHelper
 {
@@ -12,7 +16,7 @@ class Form extends FormHelper
     /**
      * {@inheritDoc}
      */
-    public function render(FormInterface $form)
+    public function render(FormInterface $form): string
     {
         // Prepare form
         if (method_exists($form, 'prepare')) {

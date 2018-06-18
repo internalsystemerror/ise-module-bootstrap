@@ -1,11 +1,14 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\Factory;
 
 use Assetic\Filter\Yui\BaseCompressorFilter;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 class CompressorFilterFactory implements FactoryInterface
 {
@@ -29,42 +32,39 @@ class CompressorFilterFactory implements FactoryInterface
     protected $filterClass = '';
 
     /**
-     * Create the BaseCompressorFilter instance
-     *
-     * @param ContainerInterface $container
-     * @param type $requestedName
-     * @return BaseCompressorFilter
+     * @inheritdoc
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): BaseCompressorFilter
     {
         return new $requestedName($this->getYuiPath(), $this->getJavaPath());
     }
 
     /**
-     * {@inheritDoc}
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * Get the java binary path
+     *
+     * @return string
      */
-    public function createService(ServiceLocatorInterface $serviceLocator, $name = null, $requestedName = null)
-    {
-        return $this($serviceLocator, $requestedName);
-    }
-
-    protected function getJavaPath()
+    protected function getJavaPath(): string
     {
         if (!self::$javaPath) {
             $isWindows      = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
             self::$javaPath = realpath(
                 $isWindows ? self::JAVA_PATH_WINDOWS : self::JAVA_PATH_UNIX
-            );
+            ) ?: '';
         }
         return self::$javaPath;
     }
 
+    /**
+     * Get the YUI compressor path
+     *
+     * @return string
+     */
     protected function getYuiPath()
     {
         if (!self::$yuiPath) {
-            self::$yuiPath = realpath('vendor/nervo/yuicompressor/yuicompressor.jar');
+            self::$yuiPath = realpath('vendor/nervo/yuicompressor/yuicompressor.jar') ?: '';
         }
         return self::$yuiPath;
     }

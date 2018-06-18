@@ -1,9 +1,13 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
-use Zend\Mvc\Controller\Plugin\FlashMessenger as PluginFlashMessenger;
-use Zend\View\Helper\FlashMessenger as FlashMessengerHelper;
+use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger as PluginFlashMessenger;
+use Zend\Mvc\Plugin\FlashMessenger\View\Helper\FlashMessenger as FlashMessengerHelper;
 
 /**
  * @SuppressWarnings(PHPMD.LongVariable)
@@ -25,7 +29,7 @@ class FlashMessenger extends FlashMessengerHelper
      * {@inheritDoc}
      */
     protected $messageSeparatorString = '</li><li>';
-    
+
     /**
      * {@inheritDoc}
      */
@@ -39,8 +43,10 @@ class FlashMessenger extends FlashMessengerHelper
 
     /**
      * Render messages
+     *
+     * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         $rendered       = '';
         $flashMessenger = $this->getPluginFlashMessenger();
@@ -48,14 +54,14 @@ class FlashMessenger extends FlashMessengerHelper
             if (!$flashMessenger->hasMessages($namespace)) {
                 continue;
             }
-            $classes = [
+            $classes  = [
                 'col-sm-3',
                 'col-sm-offset-9',
                 'col-lg-2',
                 'col-lg-offset-10',
                 'alert',
                 'alert-dismissable',
-                'alert-' . $class
+                'alert-' . $class,
             ];
             $rendered .= $this->render($namespace, $classes);
         }
@@ -73,31 +79,31 @@ class FlashMessenger extends FlashMessengerHelper
         array $messages = [],
         array $classes = [],
         $autoEscape = null
-    ) {
-    
-
+    ): string {
         // Select icon
         switch ($namespace) {
-            case PluginFlashMessenger::NAMESPACE_INFO:
-                $icon = 'info-sign';
-                break;
             case PluginFlashMessenger::NAMESPACE_ERROR:
                 $icon = 'remove';
+                break;
+            case PluginFlashMessenger::NAMESPACE_WARNING:
+                $icon = 'warning-sign';
                 break;
             case PluginFlashMessenger::NAMESPACE_SUCCESS:
                 $icon = 'ok';
                 break;
+            case PluginFlashMessenger::NAMESPACE_INFO:
+                $icon = 'info-sign';
+                break;
+            default:
             case PluginFlashMessenger::NAMESPACE_DEFAULT:
                 $icon = 'question-sign';
-                break;
-            case PluginFlashMessenger::NAMESPACE_WARNING:
-                $icon = 'warning-sign';
                 break;
         }
         $icon = '<span class="glyphicon glyphicon-' . $icon . '"></span> ';
 
         // Append to messages
         $escapeHtml = $this->getEscapeHtmlHelper();
+        $message    = '';
         foreach ($messages as &$message) {
             if ($autoEscape) {
                 $message = $escapeHtml($message);

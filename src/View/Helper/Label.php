@@ -1,4 +1,8 @@
 <?php
+/**
+ * @copyright 2018 Internalsystemerror Limited
+ */
+declare(strict_types=1);
 
 namespace Ise\Bootstrap\View\Helper;
 
@@ -41,9 +45,10 @@ class Label extends AbstractTypableHtmlElement
      * Render a primary label
      *
      * @param  string $message The label text
+     *
      * @return string
      */
-    public function primary($message)
+    public function primary($message): string
     {
         return $this->render($message, 'primary');
     }
@@ -52,9 +57,10 @@ class Label extends AbstractTypableHtmlElement
      * Render a success label
      *
      * @param  string $message The label text
+     *
      * @return string
      */
-    public function success($message)
+    public function success($message): string
     {
         return $this->render($message, 'success');
     }
@@ -63,9 +69,10 @@ class Label extends AbstractTypableHtmlElement
      * Render an info label
      *
      * @param  string $message The label text
+     *
      * @return string
      */
-    public function info($message)
+    public function info($message): string
     {
         return $this->render($message, 'info');
     }
@@ -74,9 +81,10 @@ class Label extends AbstractTypableHtmlElement
      * Render a warning label
      *
      * @param  string $message The label text
+     *
      * @return string
      */
-    public function warning($message)
+    public function warning($message): string
     {
         return $this->render($message, 'warning');
     }
@@ -85,9 +93,10 @@ class Label extends AbstractTypableHtmlElement
      * Render a danger label
      *
      * @param  string $message The label text
+     *
      * @return string
      */
-    public function danger($message)
+    public function danger($message): string
     {
         return $this->render($message, 'danger');
     }
