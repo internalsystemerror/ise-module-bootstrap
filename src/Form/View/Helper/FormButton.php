@@ -130,7 +130,7 @@ class FormButton extends ZendFormButton
             ));
         }
 
-        $attributes = $element->getAttributes();
+        $attributes = (array)$element->getAttributes();
         $tag        = 'a';
         unset($attributes['type']);
         unset($attributes['value']);

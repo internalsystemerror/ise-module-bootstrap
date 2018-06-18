@@ -167,6 +167,10 @@ class FormRow extends FormRowHelper
      */
     public function render(ElementInterface $element, $groupWrapper = null, string $controlWrapper = null): string
     {
+        if (!$element instanceof Element) {
+            return '';
+        }
+
         if ($element instanceof RadioElement) {
             /** @var FormRadio $radioHelper */
             $radioHelper = $this->view->plugin('formRadio');
@@ -202,7 +206,7 @@ class FormRow extends FormRowHelper
         string $groupWrapper = null,
         string $controlWrapper = null
     ): string {
-        $id      = $element->getAttribute('id') ?: $element->getAttribute('name');
+        $id      = (string)($element->getAttribute('id') ?: $element->getAttribute('name'));
         $control = $this->renderControl($element, $elementString, $id, $controlWrapper);
         return $this->renderGroupWrapper($element, $id, $control, $groupWrapper);
     }
